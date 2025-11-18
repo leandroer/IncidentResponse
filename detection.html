@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Detection & Response | Detection Techniques</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">IR Framework</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="detection.html" class="active">Detection</a></li>
+                <li><a href="response.html">Response</a></li>
+                <li><a href="playbooks.html">Playbooks</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Incident Detection Techniques</h1>
+            <p class="hero-subtitle">Advanced methods for identifying security incidents</p>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="content-section">
+                    <h3>Detection Overview</h3>
+                    <p>Effective incident detection is the cornerstone of a robust security posture. Early detection minimizes damage, reduces recovery time, and limits the scope of security incidents. Modern detection strategies employ multiple layers of monitoring, correlation, and analysis to identify threats across the entire attack surface.</p>
+                    
+                    <div class="info-box">
+                        <strong>Key Principle:</strong> Detection must be continuous, automated, and integrated across all security tools to provide comprehensive visibility into potential threats.
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3>Detection Sources</h3>
+                    
+                    <h4>1. Security Information and Event Management (SIEM)</h4>
+                    <p>SIEM systems aggregate and correlate logs from multiple sources to identify patterns indicative of security incidents. They provide centralized visibility and enable real-time threat detection through rule-based and behavioral analytics.</p>
+                    
+                    <p><strong>Key Capabilities:</strong></p>
+                    <ul>
+                        <li>Log aggregation from endpoints, network devices, applications, and cloud services</li>
+                        <li>Real-time correlation of events across multiple data sources</li>
+                        <li>Pre-built and custom detection rules for known attack patterns</li>
+                        <li>Threat intelligence integration for IOC matching</li>
+                        <li>Dashboards and alerting for security operations teams</li>
+                    </ul>
+
+                    <p><strong>Common SIEM Solutions:</strong> Splunk Enterprise Security, IBM QRadar, Microsoft Sentinel, Elastic Security, Chronicle Security</p>
+
+                    <h4>2. Endpoint Detection and Response (EDR)</h4>
+                    <p>EDR solutions provide deep visibility into endpoint activity, monitoring processes, file operations, network connections, and registry modifications. They enable rapid detection of malicious behavior and facilitate response actions directly on affected endpoints.</p>
+                    
+                    <p><strong>Detection Capabilities:</strong></p>
+                    <ul>
+                        <li>Behavioral analysis to identify anomalous process execution</li>
+                        <li>File integrity monitoring and hash-based detection</li>
+                        <li>Network connection monitoring and C2 detection</li>
+                        <li>Memory analysis for fileless malware detection</li>
+                        <li>Automated threat hunting capabilities</li>
+                    </ul>
+
+                    <p><strong>Leading EDR Platforms:</strong> CrowdStrike Falcon, Microsoft Defender for Endpoint, SentinelOne, Carbon Black, Cortex XDR</p>
+
+                    <h4>3. Network Detection and Response (NDR)</h4>
+                    <p>NDR systems analyze network traffic to identify malicious activity, lateral movement, data exfiltration, and command-and-control communications. They provide visibility into east-west traffic that traditional perimeter defenses miss.</p>
+                    
+                    <p><strong>Detection Methods:</strong></p>
+                    <ul>
+                        <li>Deep packet inspection for payload analysis</li>
+                        <li>Flow analysis to identify communication patterns</li>
+                        <li>Protocol anomaly detection</li>
+                        <li>Machine learning for baseline deviations</li>
+                        <li>Encrypted traffic analysis without decryption</li>
+                    </ul>
+
+                    <h4>4. Cloud Security Posture Management (CSPM)</h4>
+                    <p>CSPM tools continuously monitor cloud environments for misconfigurations, policy violations, and suspicious activities that could lead to security incidents.</p>
+                    
+                    <p><strong>Detection Focus Areas:</strong></p>
+                    <ul>
+                        <li>Misconfigured storage buckets and databases</li>
+                        <li>Overly permissive IAM policies</li>
+                        <li>Unencrypted data stores</li>
+                        <li>Anomalous API calls and access patterns</li>
+                        <li>Compliance violations</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3>Detection Techniques</h3>
+
+                    <h4>Signature-Based Detection</h4>
+                    <p>Identifies known threats by matching patterns, hashes, or signatures against a database of known malicious indicators. This method is highly effective for detecting known malware and attack patterns but cannot detect new or modified threats.</p>
+                    
+                    <div class="info-box">
+                        <strong>Best Practice:</strong> Regularly update signature databases and integrate threat intelligence feeds to maintain effectiveness against evolving threats.
+                    </div>
+
+                    <h4>Behavioral Analysis</h4>
+                    <p>Establishes baselines of normal system and user behavior, then detects deviations that may indicate compromise. This approach can identify zero-day attacks and insider threats that signature-based methods miss.</p>
+                    
+                    <p><strong>Behavioral Indicators:</strong></p>
+                    <ul>
+                        <li>Unusual process execution chains or parent-child relationships</li>
+                        <li>Abnormal network traffic volumes or destinations</li>
+                        <li>Privilege escalation attempts</li>
+                        <li>Anomalous file access patterns</li>
+                        <li>Off-hours authentication from unusual locations</li>
+                    </ul>
+
+                    <h4>Anomaly Detection</h4>
+                    <p>Uses statistical models and machine learning to identify activities that deviate from established norms. Effective for detecting sophisticated attacks that blend in with legitimate traffic.</p>
+
+                    <h4>Threat Intelligence Integration</h4>
+                    <p>Incorporates external threat intelligence feeds to proactively detect indicators of compromise (IOCs) associated with known threat actors and campaigns.</p>
+                    
+                    <p><strong>IOC Types:</strong></p>
+                    <ul>
+                        <li>IP addresses and domains associated with malicious infrastructure</li>
+                        <li>File hashes of known malware</li>
+                        <li>Email addresses used in phishing campaigns</li>
+                        <li>SSL certificate fingerprints</li>
+                        <li>Tactics, techniques, and procedures (TTPs) from threat actor profiles</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3>Detection Use Cases</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Attack Type</th>
+                                <th>Primary Detection Method</th>
+                                <th>Key Indicators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ransomware</td>
+                                <td>EDR, File Integrity Monitoring</td>
+                                <td>Mass file encryption, shadow copy deletion, unusual process execution</td>
+                            </tr>
+                            <tr>
+                                <td>Data Exfiltration</td>
+                                <td>NDR, DLP, SIEM</td>
+                                <td>Large outbound data transfers, connections to unusual destinations, compressed archives</td>
+                            </tr>
+                            <tr>
+                                <td>Lateral Movement</td>
+                                <td>NDR, EDR, SIEM</td>
+                                <td>Pass-the-hash attempts, RDP/SMB connections between workstations, credential access</td>
+                            </tr>
+                            <tr>
+                                <td>Phishing/Credential Theft</td>
+                                <td>Email Security, SIEM</td>
+                                <td>Suspicious email attachments, credential harvesting pages, impossible travel scenarios</td>
+                            </tr>
+                            <tr>
+                                <td>Privilege Escalation</td>
+                                <td>EDR, SIEM</td>
+                                <td>Exploitation of vulnerabilities, unauthorized permission changes, token manipulation</td>
+                            </tr>
+                            <tr>
+                                <td>C2 Communication</td>
+                                <td>NDR, Firewall Logs</td>
+                                <td>Beaconing behavior, connections to known malicious IPs, DNS tunneling</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section">
+                    <h3>Alert Triage and Validation</h3>
+                    <p>Not all alerts indicate genuine security incidents. Effective triage separates true positives from false positives to ensure that response resources focus on real threats.</p>
+
+                    <h4>Triage Process</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary);">
+                        <li><strong>Initial Assessment:</strong> Review alert details, severity, and affected assets</li>
+                        <li><strong>Context Gathering:</strong> Collect related logs, user information, and asset criticality</li>
+                        <li><strong>Validation:</strong> Determine if the alert represents genuine malicious activity</li>
+                        <li><strong>Prioritization:</strong> Assign priority based on severity, scope, and business impact</li>
+                        <li><strong>Assignment:</strong> Route validated incidents to appropriate response teams</li>
+                    </ol>
+
+                    <div class="warning-box">
+                        <strong>Alert Fatigue Warning:</strong> High false positive rates lead to alert fatigue, causing analysts to miss genuine threats. Continuously tune detection rules and implement risk-based prioritization to maintain effectiveness.
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3>Continuous Improvement</h3>
+                    <p>Detection capabilities must evolve alongside the threat landscape. Implement these practices to maintain effective detection:</p>
+
+                    <ul>
+                        <li><strong>Regular Rule Tuning:</strong> Adjust detection rules based on false positive rates and missed detections</li>
+                        <li><strong>Threat Hunting:</strong> Proactively search for threats that evaded automated detection</li>
+                        <li><strong>Purple Team Exercises:</strong> Simulate attacks to test detection coverage and identify gaps</li>
+                        <li><strong>Metrics and KPIs:</strong> Track mean time to detect (MTTD), false positive rates, and detection coverage</li>
+                        <li><strong>Technology Evaluation:</strong> Assess new detection technologies and approaches</li>
+                        <li><strong>Analyst Training:</strong> Ensure teams stay current with emerging attack techniques</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Incident Response Framework | Created by leandroer</p>
+            <p class="footer-note">For educational and professional use</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
