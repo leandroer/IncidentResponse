@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Detection & Response | Playbooks</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🛡️</span>
+                <span class="logo-text">IR Framework</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="detection.html">Detection</a></li>
+                <li><a href="response.html">Response</a></li>
+                <li><a href="playbooks.html" class="active">Playbooks</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Incident Response Playbooks</h1>
+            <p class="hero-subtitle">Step-by-step procedures for common security incidents</p>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <div class="content-section">
+                    <h3>Playbook Overview</h3>
+                    <p>Incident response playbooks provide detailed, prescriptive guidance for responding to specific types of security incidents. These playbooks ensure consistent, rapid response and reduce decision-making burden during high-stress situations.</p>
+                    
+                    <div class="info-box">
+                        <strong>Using These Playbooks:</strong> Adapt these templates to your organization's specific environment, tools, and procedures. Regularly test and update playbooks through tabletop exercises and real incident learnings.
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 1: Ransomware Response</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>Mass file encryption or file extension changes</li>
+                        <li>Ransom notes appearing on systems (.txt, .html files)</li>
+                        <li>Shadow copy deletion events</li>
+                        <li>Unusual process execution (PowerShell, wmic, vssadmin)</li>
+                        <li>Alerts from Microsoft Defender for Endpoint or other EDR</li>
+                    </ul>
+
+                    <h4>Immediate Actions (First 15 Minutes)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Activate Incident Response Team</strong> - Notify incident commander and key stakeholders immediately</li>
+                        <li><strong>Document</strong> - Begin incident timeline, take screenshots of ransom notes and encryption alerts</li>
+                        <li><strong>Isolate Affected Systems</strong> - Use Microsoft Defender to quarantine devices, or physically disconnect from network</li>
+                        <li><strong>Identify Patient Zero</strong> - Determine initial infection point through EDR telemetry</li>
+                        <li><strong>Disable Compromised Accounts</strong> - Reset passwords and revoke sessions in Azure AD/Active Directory</li>
+                    </ol>
+
+                    <h4>Containment (First Hour)</h4>
+                    <ul>
+                        <li>Identify all infected systems using Microsoft Sentinel or SIEM queries</li>
+                        <li>Check backup integrity and offline backup availability</li>
+                        <li>Segment network to prevent lateral spread</li>
+                        <li>Block C2 domains and IPs at firewall and DNS levels</li>
+                        <li>Identify ransomware variant (check ransom note, file extensions, encryption patterns)</li>
+                        <li>Search ID Ransomware or No More Ransom for identification and potential decryptors</li>
+                        <li>Preserve forensic evidence from affected systems</li>
+                    </ul>
+
+                    <h4>Eradication and Recovery</h4>
+                    <ul>
+                        <li>Remove ransomware from all infected systems</li>
+                        <li>Search entire environment for indicators of compromise</li>
+                        <li>Patch vulnerabilities used for initial access</li>
+                        <li>Reset all privileged account credentials</li>
+                        <li>Rebuild severely impacted systems from clean images</li>
+                        <li>Restore data from backups after validating backup cleanliness</li>
+                        <li>Test decryption tools if available (consult with ransomware experts)</li>
+                        <li>Gradually restore systems with enhanced monitoring</li>
+                    </ul>
+
+                    <h4>Communication</h4>
+                    <ul>
+                        <li>Do NOT pay ransom without executive approval and legal consultation</li>
+                        <li>Notify law enforcement (FBI Internet Crime Complaint Center)</li>
+                        <li>Report to cyber insurance carrier</li>
+                        <li>Consider engaging specialized ransomware response firm</li>
+                        <li>Assess data breach notification requirements if data was exfiltrated</li>
+                    </ul>
+
+                    <div class="danger-box">
+                        <strong>Critical Warning:</strong> Modern ransomware often includes data exfiltration before encryption. Investigate for data theft and assess notification obligations even if data is successfully restored.
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 2: Data Breach Response</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>Unusual data access or large data transfers</li>
+                        <li>Alerts from Microsoft Defender for Cloud Apps or DLP systems</li>
+                        <li>Reports from third parties about exposed data</li>
+                        <li>Notification from compromised service provider</li>
+                        <li>Discovery of publicly posted company data</li>
+                    </ul>
+
+                    <h4>Immediate Actions (First 30 Minutes)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Validate Breach</strong> - Confirm data exposure and identify what data was accessed</li>
+                        <li><strong>Assemble Response Team</strong> - Include legal counsel, privacy officer, communications</li>
+                        <li><strong>Preserve Evidence</strong> - Collect logs, access records, and system snapshots</li>
+                        <li><strong>Determine Scope</strong> - Identify affected individuals, data types, and timeframe</li>
+                        <li><strong>Begin Documentation</strong> - Create detailed timeline and impact assessment</li>
+                    </ol>
+
+                    <h4>Investigation and Containment</h4>
+                    <ul>
+                        <li>Identify attack vector (phishing, credential compromise, application vulnerability, misconfiguration)</li>
+                        <li>Determine what data was accessed, copied, or exfiltrated</li>
+                        <li>Revoke access to compromised accounts and systems</li>
+                        <li>Close vulnerabilities or misconfigurations that enabled breach</li>
+                        <li>Review access logs to identify all affected records</li>
+                        <li>Assess whether data was encrypted in transit and at rest</li>
+                        <li>Determine if data has appeared on dark web or been publicly disclosed</li>
+                    </ul>
+
+                    <h4>Regulatory and Legal Actions</h4>
+                    <ul>
+                        <li>Assess notification requirements under applicable laws (GDPR, CCPA, HIPAA, etc.)</li>
+                        <li>Calculate regulatory notification deadlines</li>
+                        <li>Notify data protection authorities as required</li>
+                        <li>Prepare breach notification letters for affected individuals</li>
+                        <li>Consider offering credit monitoring or identity protection services</li>
+                        <li>Work with legal counsel on potential litigation and liability</li>
+                        <li>Document all breach response activities for regulatory inquiries</li>
+                    </ul>
+
+                    <h4>Communication Plan</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Audience</th>
+                                <th>Timing</th>
+                                <th>Key Messages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Executive Leadership</td>
+                                <td>Within 2 hours</td>
+                                <td>Breach scope, business impact, response plan</td>
+                            </tr>
+                            <tr>
+                                <td>Legal & Compliance</td>
+                                <td>Within 2 hours</td>
+                                <td>Data types, affected individuals, regulatory obligations</td>
+                            </tr>
+                            <tr>
+                                <td>Regulators</td>
+                                <td>Per legal requirements</td>
+                                <td>Breach details, affected data subjects, remediation</td>
+                            </tr>
+                            <tr>
+                                <td>Affected Individuals</td>
+                                <td>Per legal requirements</td>
+                                <td>What happened, data involved, protective actions</td>
+                            </tr>
+                            <tr>
+                                <td>Media/Public</td>
+                                <td>As needed</td>
+                                <td>Transparent facts, remediation, customer protection</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 3: Phishing Attack Response</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>User reports of suspicious emails</li>
+                        <li>Multiple failed login attempts after email campaign</li>
+                        <li>Email security gateway alerts</li>
+                        <li>Discovery of credential harvesting websites</li>
+                        <li>Alerts from Microsoft Defender for Office 365</li>
+                    </ul>
+
+                    <h4>Immediate Actions (First 30 Minutes)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Analyze Phishing Email</strong> - Review headers, links, attachments in isolated environment</li>
+                        <li><strong>Identify Recipients</strong> - Query mail logs to find all recipients of phishing email</li>
+                        <li><strong>Quarantine Emails</strong> - Use Microsoft Defender to remove phishing emails from all mailboxes</li>
+                        <li><strong>Block Indicators</strong> - Add malicious URLs, domains, and sender addresses to block lists</li>
+                        <li><strong>Alert Users</strong> - Notify organization about phishing campaign</li>
+                    </ol>
+
+                    <h4>Investigation</h4>
+                    <ul>
+                        <li>Identify users who clicked links or opened attachments</li>
+                        <li>Check for credential submission on phishing sites</li>
+                        <li>Review authentication logs for compromised accounts</li>
+                        <li>Scan endpoints of users who interacted with phishing email</li>
+                        <li>Search for similar emails that bypassed initial detection</li>
+                        <li>Analyze malware if attachments were opened</li>
+                        <li>Check for signs of account compromise or lateral movement</li>
+                    </ul>
+
+                    <h4>Remediation</h4>
+                    <ul>
+                        <li>Force password resets for users who submitted credentials</li>
+                        <li>Revoke active sessions for compromised accounts</li>
+                        <li>Enable MFA for affected accounts if not already active</li>
+                        <li>Remove malware from infected systems</li>
+                        <li>Update email security rules to block similar attacks</li>
+                        <li>Report phishing infrastructure to hosting providers and domain registrars</li>
+                        <li>Submit samples to Microsoft, Google Safe Browsing, PhishTank</li>
+                    </ul>
+
+                    <h4>User Education</h4>
+                    <ul>
+                        <li>Send organization-wide awareness message about the attack</li>
+                        <li>Provide examples of the phishing email for training</li>
+                        <li>Remind users how to report suspicious emails</li>
+                        <li>Conduct targeted training for users who fell for phishing</li>
+                        <li>Consider simulation exercises to improve awareness</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 4: Compromised Account</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>Impossible travel alerts (Azure AD Identity Protection)</li>
+                        <li>Login from suspicious locations or devices</li>
+                        <li>Unusual user activity or data access patterns</li>
+                        <li>User reports they cannot access their account</li>
+                        <li>Automated password reset or MFA changes</li>
+                    </ul>
+
+                    <h4>Immediate Containment (First 15 Minutes)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Disable Account</strong> - Immediately disable the compromised account in Azure AD</li>
+                        <li><strong>Revoke Sessions</strong> - Terminate all active sessions and refresh tokens</li>
+                        <li><strong>Reset Credentials</strong> - Force password reset and review security questions</li>
+                        <li><strong>Contact User</strong> - Verify suspicious activity with legitimate user through alternative channel</li>
+                        <li><strong>Begin Investigation</strong> - Review account activity logs and access patterns</li>
+                    </ol>
+
+                    <h4>Investigation</h4>
+                    <ul>
+                        <li>Review Azure AD sign-in logs for unauthorized access</li>
+                        <li>Check email rules, forwarding, and mailbox delegates</li>
+                        <li>Examine sent items for phishing or spam from compromised account</li>
+                        <li>Review file access logs in SharePoint and OneDrive</li>
+                        <li>Check for data exfiltration to external accounts</li>
+                        <li>Identify how account was compromised (phishing, password spray, breach)</li>
+                        <li>Look for lateral movement using compromised credentials</li>
+                        <li>Review privilege escalation attempts</li>
+                    </ul>
+
+                    <h4>Recovery</h4>
+                    <ul>
+                        <li>Remove unauthorized email rules and delegates</li>
+                        <li>Delete phishing or spam emails sent from account</li>
+                        <li>Re-enable account with new strong password</li>
+                        <li>Enforce MFA registration if not already enabled</li>
+                        <li>Register trusted devices and locations</li>
+                        <li>Review and adjust account permissions</li>
+                        <li>Monitor account closely for several weeks</li>
+                    </ul>
+
+                    <h4>Preventive Measures</h4>
+                    <ul>
+                        <li>Implement Azure AD Conditional Access policies</li>
+                        <li>Enable Azure AD Identity Protection risk-based policies</li>
+                        <li>Require MFA for all users, especially privileged accounts</li>
+                        <li>Deploy passwordless authentication where possible</li>
+                        <li>Implement suspicious activity alerts</li>
+                        <li>Conduct regular access reviews</li>
+                        <li>User training on password hygiene and phishing awareness</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 5: Insider Threat Response</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>Unusual data access or downloads by privileged user</li>
+                        <li>Access to resources outside normal job function</li>
+                        <li>After-hours access patterns</li>
+                        <li>Large file transfers to personal accounts or external storage</li>
+                        <li>Reports of policy violations or suspicious behavior</li>
+                    </ul>
+
+                    <h4>Initial Response (First Hour)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Notify Management</strong> - Alert HR, legal, and executive leadership immediately</li>
+                        <li><strong>Preserve Evidence</strong> - Collect logs, emails, file access records before alerting subject</li>
+                        <li><strong>Assess Risk</strong> - Determine potential damage and ongoing threat</li>
+                        <li><strong>Legal Consultation</strong> - Involve legal counsel before taking action against employee</li>
+                        <li><strong>Secure Environment</strong> - Prepare to disable access if threat is confirmed</li>
+                    </ol>
+
+                    <h4>Investigation (Coordinated with HR and Legal)</h4>
+                    <ul>
+                        <li>Review comprehensive activity logs for suspicious user</li>
+                        <li>Examine file access, downloads, and uploads</li>
+                        <li>Check email for data transmission to personal accounts</li>
+                        <li>Review removable media usage and print logs</li>
+                        <li>Analyze network traffic for data exfiltration</li>
+                        <li>Interview colleagues and managers</li>
+                        <li>Review recent performance issues or disciplinary actions</li>
+                        <li>Check for access to systems beyond job requirements</li>
+                    </ul>
+
+                    <h4>Containment (If Threat Confirmed)</h4>
+                    <ul>
+                        <li>Coordinate with HR and legal on timing of access removal</li>
+                        <li>Disable network accounts and revoke VPN access</li>
+                        <li>Disable badge access to facilities</li>
+                        <li>Retrieve company devices, credentials, and access tokens</li>
+                        <li>Change passwords for shared accounts they accessed</li>
+                        <li>Document all actions taken for potential legal proceedings</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <strong>Legal Considerations:</strong> Insider threat investigations involve significant legal and privacy concerns. Always coordinate with HR and legal counsel before surveillance, evidence collection, or employment actions.
+                    </div>
+
+                    <h4>Prevention</h4>
+                    <ul>
+                        <li>Implement User and Entity Behavior Analytics (UEBA) in Microsoft Sentinel</li>
+                        <li>Deploy Microsoft Purview Data Loss Prevention policies</li>
+                        <li>Enforce principle of least privilege for all accounts</li>
+                        <li>Regular access reviews and privilege recertification</li>
+                        <li>Monitor privileged account activity</li>
+                        <li>Implement separation of duties for critical functions</li>
+                        <li>Employee awareness training on acceptable use policies</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h3>Playbook 6: Malware Outbreak</h3>
+                    
+                    <h4>Initial Detection</h4>
+                    <p><strong>Indicators:</strong></p>
+                    <ul>
+                        <li>Antivirus or EDR alerts across multiple systems</li>
+                        <li>Unusual process execution or system behavior</li>
+                        <li>Network traffic to suspicious destinations</li>
+                        <li>System performance degradation</li>
+                        <li>Microsoft Defender for Endpoint outbreak detection</li>
+                    </ul>
+
+                    <h4>Immediate Actions (First 30 Minutes)</h4>
+                    <ol style="padding-left: 2rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                        <li><strong>Identify Malware Type</strong> - Determine if it's ransomware, wiper, trojan, or other malware</li>
+                        <li><strong>Assess Spread</strong> - Query Microsoft Sentinel or SIEM to identify all infected systems</li>
+                        <li><strong>Isolate Infections</strong> - Quarantine infected devices using Microsoft Defender</li>
+                        <li><strong>Block IOCs</strong> - Add malware hashes, C2 IPs, and domains to block lists</li>
+                        <li><strong>Preserve Samples</strong> - Collect malware samples for analysis</li>
+                    </ol>
+
+                    <h4>Analysis</h4>
+                    <ul>
+                        <li>Analyze malware behavior in isolated sandbox</li>
+                        <li>Identify capabilities (data theft, encryption, backdoor, etc.)</li>
+                        <li>Determine infection vector (email, drive-by download, removable media)</li>
+                        <li>Identify persistence mechanisms</li>
+                        <li>Check threat intelligence for known malware family</li>
+                        <li>Review network connections and exfiltration attempts</li>
+                    </ul>
+
+                    <h4>Containment and Eradication</h4>
+                    <ul>
+                        <li>Deploy updated antimalware signatures across environment</li>
+                        <li>Run full scans on all potentially affected systems</li>
+                        <li>Remove malware and associated artifacts</li>
+                        <li>Close infection vector (patch vulnerability, block malicious sites)</li>
+                        <li>Search for additional compromised systems using IOCs</li>
+                        <li>Reset credentials if credential theft suspected</li>
+                        <li>Rebuild heavily infected systems</li>
+                    </ul>
+
+                    <h4>Recovery and Prevention</h4>
+                    <ul>
+                        <li>Restore systems to normal operation with monitoring</li>
+                        <li>Update Microsoft Defender detection rules</li>
+                        <li>Implement additional endpoint protections</li>
+                        <li>Review and strengthen email security controls</li>
+                        <li>Deploy attack surface reduction rules</li>
+                        <li>User awareness training on malware risks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Incident Response Framework | Created by leandroer</p>
+            <p class="footer-note">For educational and professional use</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
