@@ -9,7 +9,10 @@ incident-response/
 ├── js/
 │   └── main.js            # Navigation and interactivity
 └── README.md              # This file
+
 ## Repository Notice
 
-These repositories are maintained as professional cybersecurity portfolio and research projects focused on detection engineering, incident response, AI security, threat hunting, Microsoft Sentinel, Microsoft Defender XDR, Microsoft Purview, and security automation.
-Content is published for educational and professional reference purposes. Community contributions, issue submissions, and pull requests are not currently being accepted.
+This repository is maintained as a professional cybersecurity portfolio and research project focused on detection engineering, incident response, threat hunting, security automation, and AI security.
+Content is published for educational, technical, and professional reference purposes. This repository is not currently accepting community contributions, pull requests, issue submissions, or feature requests.
+All content is provided as-is and should be reviewed, tested, and validated before use in production environments.
+
