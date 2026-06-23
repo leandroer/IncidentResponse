@@ -1,15 +1,3 @@
-incident-response/
-├── index.html              # Homepage with framework overview
-├── detection.html          # Detection techniques and tools
-├── response.html           # Response procedures and lifecycle
-├── playbooks.html          # Incident-specific playbooks
-├── resources.html          # Tools, training, and references
-├── css/
-│   └── style.css          # Professional styling
-├── js/
-│   └── main.js            # Navigation and interactivity
-└── README.md              # This file
-
 ## Executive Summary
 
 Incident Response is a practical and structured discipline focused on identifying, investigating, containing, eradicating, and recovering from cybersecurity incidents. Effective incident response reduces organizational risk, minimizes business impact, preserves evidence, and enables continuous improvement of security operations.
@@ -21,3 +9,56 @@ The repository combines industry-recognized incident response methodologies, ope
 Topics covered include incident response lifecycle management, threat detection, triage, investigation workflows, containment strategies, eradication techniques, recovery planning, lessons learned, digital forensics concepts, threat hunting methodologies, detection engineering, security operations practices, and modern incident response challenges involving cloud services, identity systems, and emerging technologies.
 
 This repository is intended to serve as a professional reference, educational resource, and operational framework for modern cybersecurity incident response.
+
+## Incident Response Lifecycle Architecture
+
+```mermaid
+flowchart LR
+
+A[Preparation]
+--> B[Detection & Analysis]
+
+B --> C[Incident Triage]
+
+C --> D[Investigation]
+
+D --> E[Containment]
+
+E --> F[Eradication]
+
+F --> G[Recovery]
+
+G --> H[Lessons Learned]
+
+B --> I[Threat Intelligence]
+D --> I
+
+D --> J[Digital Forensics]
+
+J --> K[Evidence Collection]
+
+K --> L[Chain of Custody]
+
+H --> M[Process Improvement]
+
+M --> A
+```
+
+IncidentResponse/
+├── Preparation
+├── Detection-and-Analysis
+├── Containment
+├── Eradication
+├── Recovery
+├── Lessons-Learned
+├── Threat-Hunting
+├── Digital-Forensics
+├── Detection-Engineering
+├── Playbooks
+└── References
+
+## Repository Notice
+
+This repository is maintained as a professional cybersecurity reference and educational resource. The content is intended to support incident response, threat hunting, security operations, digital forensics, and detection engineering activities.
+
+The material is provided for educational and professional reference purposes and should be adapted to the requirements of individual organizations and environments.
