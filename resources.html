@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Detection & Response | Resources</title>
+    <meta name="description" content="A field-oriented library of incident response frameworks, investigation tools, evidence guidance, templates, and technical reading for working defenders.">
+    <title>Incident Detection &amp; Response | Resources</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <span class="logo-icon">🛡️</span>
+                <span class="logo-icon" aria-hidden="true">🛡️</span>
                 <span class="logo-text">IR Framework</span>
             </div>
             <ul class="nav-menu">
@@ -18,443 +19,327 @@
                 <li><a href="detection.html">Detection</a></li>
                 <li><a href="response.html">Response</a></li>
                 <li><a href="playbooks.html">Playbooks</a></li>
-                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="resources.html" class="active" aria-current="page">Resources</a></li>
             </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero resource-hero">
         <div class="container">
-            <h1>Resources & References</h1>
-            <p class="hero-subtitle">Tools, frameworks, and learning materials for incident response</p>
+            <p class="eyebrow">RESPONDER LIBRARY</p>
+            <h1>Resources &amp; References</h1>
+            <p class="hero-subtitle">Frameworks, tools, field notes, and reusable artifacts for incident detection and response.</p>
+            <p class="review-date">Last reviewed: July 17, 2026</p>
         </div>
     </header>
 
     <main>
-        <section>
+        <section class="resource-library">
             <div class="container">
-                <div class="content-section">
-                    <h3>Industry Frameworks</h3>
-                    
-                    <h4>NIST Cybersecurity Framework</h4>
-                    <p>The NIST Cybersecurity Framework provides a policy framework of computer security guidance for how private sector organizations can assess and improve their ability to prevent, detect, and respond to cyber attacks.</p>
-                    <ul>
-                        <li><strong>NIST SP 800-61 Rev 2:</strong> Computer Security Incident Handling Guide</li>
-                        <li><strong>NIST SP 800-83:</strong> Guide to Malware Incident Prevention and Handling</li>
-                        <li><strong>NIST SP 800-86:</strong> Guide to Integrating Forensic Techniques into Incident Response</li>
+                <nav class="resource-index" aria-label="Resources on this page">
+                    <h2>Jump to a working area</h2>
+                    <div class="resource-index-grid">
+                        <a href="#frameworks">Frameworks</a>
+                        <a href="#detection-engineering">Detection engineering</a>
+                        <a href="#endpoint-identity">Endpoint &amp; identity</a>
+                        <a href="#network-cloud">Network &amp; cloud</a>
+                        <a href="#forensics">Forensics &amp; evidence</a>
+                        <a href="#malware">Malware analysis</a>
+                        <a href="#intelligence">Threat intelligence</a>
+                        <a href="#field-kit">Responder field kit</a>
+                        <a href="#training">Training &amp; community</a>
+                        <a href="#legal">Legal &amp; reporting</a>
+                        <a href="#reading">Technical reading</a>
+                    </div>
+                </nav>
+
+                <aside class="info-box resource-principle">
+                    <h2>Selection principle</h2>
+                    <p>Choose tools for the evidence source and decision at hand. Preserve original telemetry, record collection time and operator actions, and validate automated findings before containment or eradication.</p>
+                </aside>
+
+                <section class="content-section resource-section" id="frameworks">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">REFERENCE</span><h2>Frameworks and operating models</h2></div>
+                        <p>Use these to structure governance, preparation, execution, and post-incident improvement.</p>
+                    </div>
+
+                    <div class="resource-cards">
+                        <article class="resource-card">
+                            <h3><a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61 Rev. 3</a></h3>
+                            <p>Current incident-response recommendations aligned to the six functions of NIST CSF 2.0. Rev. 3 supersedes Rev. 2.</p>
+                        </article>
+                        <article class="resource-card">
+                            <h3><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework 2.0</a></h3>
+                            <p>Risk outcomes across Govern, Identify, Protect, Detect, Respond, and Recover.</p>
+                        </article>
+                        <article class="resource-card">
+                            <h3><a href="https://attack.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a></h3>
+                            <p>Adversary tactics and techniques for investigation scoping, detection coverage, and purple-team validation.</p>
+                        </article>
+                        <article class="resource-card">
+                            <h3><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" rel="noopener noreferrer">ATT&amp;CK Navigator</a></h3>
+                            <p>Layer-based mapping for observed behavior, detection coverage, and response priorities.</p>
+                        </article>
+                        <article class="resource-card">
+                            <h3><a href="https://car.mitre.org/" target="_blank" rel="noopener noreferrer">MITRE Cyber Analytics Repository</a></h3>
+                            <p>Behavioral analytic ideas mapped to ATT&amp;CK techniques and relevant data sources.</p>
+                        </article>
+                        <article class="resource-card">
+                            <h3><a href="https://www.iso.org/standard/78973.html" target="_blank" rel="noopener noreferrer">ISO/IEC 27035-1:2023</a></h3>
+                            <p>Principles and process guidance for managing information-security incidents.</p>
+                        </article>
+                    </div>
+
+                    <details>
+                        <summary>Additional NIST technical references</summary>
+                        <ul class="linked-list">
+                            <li><a href="https://csrc.nist.gov/pubs/sp/800/83/r1/final" target="_blank" rel="noopener noreferrer">SP 800-83 Rev. 1</a> — malware prevention and handling.</li>
+                            <li><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener noreferrer">SP 800-86</a> — integrating forensic techniques into incident response.</li>
+                            <li><a href="https://csrc.nist.gov/pubs/sp/800/92/final" target="_blank" rel="noopener noreferrer">SP 800-92</a> — security log management.</li>
+                        </ul>
+                    </details>
+                </section>
+
+                <section class="content-section resource-section" id="detection-engineering">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">ENGINEERING</span><h2>Detection engineering</h2></div>
+                        <p>Represent behavior as portable logic, test it against real telemetry, and track coverage.</p>
+                    </div>
+                    <div class="table-scroll" tabindex="0" aria-label="Detection engineering tools, horizontally scrollable">
+                        <table>
+                            <caption>Detection content and analysis resources</caption>
+                            <thead><tr><th scope="col">Resource</th><th scope="col">Operational use</th><th scope="col">Deployment</th><th scope="col">Access</th></tr></thead>
+                            <tbody>
+                                <tr><td><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener noreferrer">Sigma</a></td><td>Portable detection rules and backend translation</td><td>Repository / pipeline</td><td>Open source</td></tr>
+                                <tr><td><a href="https://github.com/VirusTotal/yara" target="_blank" rel="noopener noreferrer">YARA</a></td><td>File and memory pattern matching</td><td>Host / analysis pipeline</td><td>Open source</td></tr>
+                                <tr><td><a href="https://learn.microsoft.com/en-us/azure/sentinel/kusto-overview" target="_blank" rel="noopener noreferrer">KQL</a></td><td>Telemetry hunting, correlation, and analytics</td><td>Microsoft security services</td><td>Commercial platform</td></tr>
+                                <tr><td><a href="https://github.com/elastic/detection-rules" target="_blank" rel="noopener noreferrer">Elastic detection rules</a></td><td>Versioned detection logic and unit tests</td><td>Elastic Security</td><td>Open repository</td></tr>
+                                <tr><td><a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" rel="noopener noreferrer">ATT&amp;CK Navigator</a></td><td>Coverage, gap, and incident-behavior mapping</td><td>Browser / local deployment</td><td>Open source</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-section resource-section" id="endpoint-identity">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">INVESTIGATION</span><h2>Endpoint and identity</h2></div>
+                        <p>Correlate process, persistence, session, credential, and directory activity before isolating assets or disabling identities.</p>
+                    </div>
+                    <div class="table-scroll" tabindex="0" aria-label="Endpoint and identity tools, horizontally scrollable">
+                        <table>
+                            <caption>Endpoint and identity investigation platforms</caption>
+                            <thead><tr><th scope="col">Resource</th><th scope="col">Operational use</th><th scope="col">Deployment</th><th scope="col">Data-handling note</th></tr></thead>
+                            <tbody>
+                                <tr><td><a href="https://learn.microsoft.com/en-us/defender-endpoint/" target="_blank" rel="noopener noreferrer">Microsoft Defender for Endpoint</a></td><td>Endpoint detection, advanced hunting, investigation, and live response</td><td>SaaS / endpoint sensor</td><td>Tenant-controlled telemetry; validate retention</td></tr>
+                                <tr><td><a href="https://www.crowdstrike.com/platform/endpoint-security/falcon-insight-xdr/" target="_blank" rel="noopener noreferrer">CrowdStrike Falcon</a></td><td>Endpoint detection, investigation, containment, and real-time response</td><td>SaaS / endpoint sensor</td><td>Cloud telemetry; validate regional and retention requirements</td></tr>
+                                <tr><td><a href="https://learn.microsoft.com/en-us/entra/id-protection/overview-identity-protection" target="_blank" rel="noopener noreferrer">Microsoft Entra ID Protection</a></td><td>Risky user, sign-in, and identity investigation</td><td>SaaS</td><td>Correlate risk events with audit and endpoint evidence</td></tr>
+                                <tr><td><a href="https://learn.microsoft.com/en-us/defender-for-identity/what-is" target="_blank" rel="noopener noreferrer">Microsoft Defender for Identity</a></td><td>Hybrid identity detection and lateral-movement investigation</td><td>SaaS / directory sensors</td><td>Preserve directory and authentication logs</td></tr>
+                                <tr><td><a href="https://github.com/SpecterOps/BloodHound" target="_blank" rel="noopener noreferrer">BloodHound Community Edition</a></td><td>Identity attack-path analysis</td><td>Self-hosted</td><td>Graph data is highly sensitive; restrict access</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-section resource-section" id="network-cloud">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">TELEMETRY</span><h2>Network, cloud, SaaS, and containers</h2></div>
+                        <p>Collect control-plane, identity, workload, packet, and application evidence as a single incident timeline.</p>
+                    </div>
+                    <div class="resource-columns">
+                        <div>
+                            <h3>Network</h3>
+                            <ul class="linked-list">
+                                <li><a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer"><strong>Wireshark</strong></a> — packet-level inspection; captures may contain credentials and regulated data.</li>
+                                <li><a href="https://zeek.org/" target="_blank" rel="noopener noreferrer"><strong>Zeek</strong></a> — structured network metadata and protocol analysis.</li>
+                                <li><a href="https://suricata.io/" target="_blank" rel="noopener noreferrer"><strong>Suricata</strong></a> — IDS/IPS, protocol logging, and rule-based detection.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Cloud and SaaS</h3>
+                            <ul class="linked-list">
+                                <li><a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction" target="_blank" rel="noopener noreferrer"><strong>Microsoft Defender for Cloud</strong></a> — posture and workload protection across Azure, AWS, and Google Cloud.</li>
+                                <li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html" target="_blank" rel="noopener noreferrer"><strong>AWS CloudTrail</strong></a> and <a href="https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html" target="_blank" rel="noopener noreferrer"><strong>GuardDuty</strong></a> — control-plane evidence and managed threat detection.</li>
+                                <li><a href="https://cloud.google.com/security-command-center/docs/concepts-security-command-center-overview" target="_blank" rel="noopener noreferrer"><strong>Google Security Command Center</strong></a> — cloud findings, posture, and threat detection.</li>
+                                <li><a href="https://learn.microsoft.com/en-us/purview/audit-solutions-overview" target="_blank" rel="noopener noreferrer"><strong>Microsoft Purview Audit</strong></a> — Microsoft 365 user and administrative activity.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Containers and Kubernetes</h3>
+                            <ul class="linked-list">
+                                <li><a href="https://falco.org/" target="_blank" rel="noopener noreferrer"><strong>Falco</strong></a> — runtime detection using kernel and Kubernetes signals.</li>
+                                <li><a href="https://trivy.dev/" target="_blank" rel="noopener noreferrer"><strong>Trivy</strong></a> — image, filesystem, configuration, and SBOM assessment.</li>
+                                <li><a href="https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/" target="_blank" rel="noopener noreferrer"><strong>Kubernetes audit logs</strong></a> — API activity and control-plane evidence.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section resource-section" id="forensics">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">EVIDENCE</span><h2>Forensics and evidence collection</h2></div>
+                        <p>Use targeted triage first, then escalate to full acquisition when scope, legal hold, or investigative depth requires it.</p>
+                    </div>
+                    <div class="table-scroll" tabindex="0" aria-label="Forensic tools, horizontally scrollable">
+                        <table>
+                            <caption>Collection and forensic analysis tools</caption>
+                            <thead><tr><th scope="col">Tool</th><th scope="col">Operational use</th><th scope="col">Deployment</th><th scope="col">Access</th></tr></thead>
+                            <tbody>
+                                <tr><td><a href="https://docs.velociraptor.app/" target="_blank" rel="noopener noreferrer">Velociraptor</a></td><td>Fleet-scale endpoint triage, artifact collection, and hunting</td><td>Self-hosted / endpoint client</td><td>Open source</td></tr>
+                                <tr><td><a href="https://www.kroll.com/en/insights/publications/cyber/kroll-artifact-parser-extractor-kape" target="_blank" rel="noopener noreferrer">KAPE</a></td><td>Targeted Windows triage and artifact processing</td><td>Responder workstation</td><td>Free</td></tr>
+                                <tr><td><a href="https://www.exterro.com/digital-forensics-software/ftk-imager" target="_blank" rel="noopener noreferrer">FTK Imager</a></td><td>Disk imaging and forensic acquisition</td><td>Responder workstation</td><td>Free</td></tr>
+                                <tr><td><a href="https://www.autopsy.com/" target="_blank" rel="noopener noreferrer">Autopsy / Sleuth Kit</a></td><td>Disk, filesystem, and artifact analysis</td><td>Analyst workstation</td><td>Open source</td></tr>
+                                <tr><td><a href="https://volatilityfoundation.org/" target="_blank" rel="noopener noreferrer">Volatility 3</a></td><td>Memory-image analysis</td><td>Analyst workstation</td><td>Open source</td></tr>
+                                <tr><td><a href="https://www.x-ways.net/forensics/" target="_blank" rel="noopener noreferrer">X-Ways Forensics</a></td><td>Disk, filesystem, memory, and case analysis</td><td>Analyst workstation</td><td>Commercial</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="info-box">
+                        <h3>Evidence discipline</h3>
+                        <p>Record the source, collector, UTC timestamps, acquisition method, tool version, cryptographic hash, storage location, and every transfer. Avoid changing system state unless the response decision justifies it and the action is recorded.</p>
+                    </div>
+                </section>
+
+                <section class="content-section resource-section" id="malware">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">ANALYSIS</span><h2>Malware analysis</h2></div>
+                        <p>Separate initial classification, dynamic behavior, and reverse engineering. Never treat a single scanner verdict as conclusive.</p>
+                    </div>
+                    <div class="warning-box">
+                        <h3>Public-service handling warning</h3>
+                        <p>Before submitting a file, URL, packet capture, document, or indicator to a public analysis service, confirm the organization’s data-handling policy. Public or community submissions may become accessible to vendors, researchers, or other service users. Use private analysis, contractual controls, or an isolated internal sandbox for sensitive material.</p>
+                    </div>
+                    <ul class="linked-list tool-list">
+                        <li><a href="https://www.virustotal.com/" target="_blank" rel="noopener noreferrer"><strong>VirusTotal</strong></a> — multi-engine enrichment and relationship analysis; submission visibility depends on service and license.</li>
+                        <li><a href="https://any.run/" target="_blank" rel="noopener noreferrer"><strong>ANY.RUN</strong></a> — interactive dynamic analysis; verify privacy mode before uploading.</li>
+                        <li><a href="https://github.com/mandiant/capa" target="_blank" rel="noopener noreferrer"><strong>capa</strong></a> — identifies executable capabilities from static or dynamic evidence.</li>
+                        <li><a href="https://ghidra-sre.org/" target="_blank" rel="noopener noreferrer"><strong>Ghidra</strong></a> and <a href="https://hex-rays.com/ida-pro" target="_blank" rel="noopener noreferrer"><strong>IDA Pro</strong></a> — disassembly and reverse engineering.</li>
+                        <li><a href="https://github.com/kevoreilly/CAPEv2" target="_blank" rel="noopener noreferrer"><strong>CAPE Sandbox</strong></a> — self-hosted automated malware analysis and configuration extraction.</li>
                     </ul>
+                </section>
 
-                    <h4>SANS Incident Response</h4>
-                    <p>The SANS Institute provides comprehensive incident response training and resources including the widely-adopted six-phase incident response methodology.</p>
-                    <ul>
-                        <li>SANS Incident Handler's Handbook</li>
-                        <li>SANS Digital Forensics and Incident Response (DFIR) resources</li>
-                        <li>Internet Storm Center threat intelligence</li>
-                    </ul>
+                <section class="content-section resource-section" id="intelligence">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">INTELLIGENCE</span><h2>Threat intelligence and sharing</h2></div>
+                        <p>Use intelligence to add context and prioritize decisions—not as a substitute for evidence from the affected environment.</p>
+                    </div>
+                    <div class="resource-columns">
+                        <div><h3>Research and platforms</h3><ul class="linked-list">
+                            <li><a href="https://www.microsoft.com/en-us/security/security-insider/intelligence-reports" target="_blank" rel="noopener noreferrer">Microsoft Threat Intelligence</a></li>
+                            <li><a href="https://cloud.google.com/security/resources/mandiant" target="_blank" rel="noopener noreferrer">Google Cloud Mandiant</a></li>
+                            <li><a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" rel="noopener noreferrer">CrowdStrike threat research</a></li>
+                            <li><a href="https://www.recordedfuture.com/" target="_blank" rel="noopener noreferrer">Recorded Future</a></li>
+                        </ul></div>
+                        <div><h3>Open intelligence</h3><ul class="linked-list">
+                            <li><a href="https://www.misp-project.org/" target="_blank" rel="noopener noreferrer">MISP</a> — structured sharing and correlation.</li>
+                            <li><a href="https://otx.alienvault.com/" target="_blank" rel="noopener noreferrer">LevelBlue Open Threat Exchange</a> — community indicators and pulses.</li>
+                            <li><a href="https://abuse.ch/" target="_blank" rel="noopener noreferrer">abuse.ch</a> — MalwareBazaar, URLhaus, ThreatFox, and related feeds.</li>
+                            <li><a href="https://www.spamhaus.org/" target="_blank" rel="noopener noreferrer">Spamhaus</a> — abuse and infrastructure reputation data.</li>
+                        </ul></div>
+                        <div><h3>Government and sector sharing</h3><ul class="linked-list">
+                            <li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories" target="_blank" rel="noopener noreferrer">CISA Cybersecurity Advisories</a></li>
+                            <li><a href="https://www.cisa.gov/stopransomware" target="_blank" rel="noopener noreferrer">CISA StopRansomware</a></li>
+                            <li><a href="https://www.nationalisacs.org/" target="_blank" rel="noopener noreferrer">National Council of ISACs</a></li>
+                            <li><a href="https://www.cisecurity.org/ms-isac" target="_blank" rel="noopener noreferrer">MS-ISAC</a></li>
+                        </ul></div>
+                    </div>
+                </section>
 
-                    <h4>MITRE ATT&CK Framework</h4>
-                    <p>A globally-accessible knowledge base of adversary tactics and techniques based on real-world observations. Essential for understanding attacker behavior and improving detection.</p>
-                    <ul>
-                        <li>Enterprise ATT&CK Matrix</li>
-                        <li>ATT&CK Navigator for threat mapping</li>
-                        <li>Cyber Analytics Repository (CAR)</li>
-                    </ul>
+                <section class="content-section resource-section" id="field-kit">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">TEMPLATES</span><h2>Responder field kit</h2></div>
+                        <p>Plain Markdown artifacts designed for quick adaptation during preparation or an active incident.</p>
+                    </div>
+                    <div class="field-kit-grid">
+                        <a class="field-kit-item" href="resources/templates/incident-severity-matrix.md" download><strong>Incident severity matrix</strong><span>Impact, scope, confidence, and escalation criteria</span></a>
+                        <a class="field-kit-item" href="resources/templates/initial-incident-checklist.md" download><strong>Initial incident checklist</strong><span>First-hour validation, preservation, and coordination</span></a>
+                        <a class="field-kit-item" href="resources/templates/evidence-chain-of-custody.md" download><strong>Evidence and chain of custody</strong><span>Collection, hashes, storage, and transfers</span></a>
+                        <a class="field-kit-item" href="resources/templates/ransomware-containment-matrix.md" download><strong>Ransomware containment matrix</strong><span>Decision authority, blast radius, and action windows</span></a>
+                        <a class="field-kit-item" href="resources/templates/cloud-evidence-checklist.md" download><strong>Cloud evidence checklist</strong><span>Identity, control plane, workload, network, and SaaS logs</span></a>
+                        <a class="field-kit-item" href="resources/templates/identity-investigation-worksheet.md" download><strong>Identity investigation worksheet</strong><span>Sessions, credentials, privilege, and persistence</span></a>
+                        <a class="field-kit-item" href="resources/templates/executive-status-update.md" download><strong>Executive status update</strong><span>Known facts, business impact, decisions, and next update</span></a>
+                        <a class="field-kit-item" href="resources/templates/post-incident-review.md" download><strong>Post-incident review</strong><span>Timeline, control gaps, ownership, and validation</span></a>
+                    </div>
+                </section>
 
-                    <h4>ISO/IEC 27035</h4>
-                    <p>International standard for information security incident management, providing structured guidance for incident response programs.</p>
-                </div>
+                <section class="content-section resource-section" id="training">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">DEVELOPMENT</span><h2>Training, certifications, and community</h2></div>
+                        <p>Prioritize hands-on investigation, evidence interpretation, reporting, and decision-making over credential collecting.</p>
+                    </div>
+                    <div class="resource-columns">
+                        <div><h3>Role-aligned certifications</h3><ul class="linked-list">
+                            <li><a href="https://www.giac.org/certifications/certified-incident-handler-gcih/" target="_blank" rel="noopener noreferrer">GCIH</a> — incident handling.</li>
+                            <li><a href="https://www.giac.org/certifications/certified-forensic-analyst-gcfa/" target="_blank" rel="noopener noreferrer">GCFA</a> — enterprise forensics and response.</li>
+                            <li><a href="https://www.giac.org/certifications/reverse-engineering-malware-grem/" target="_blank" rel="noopener noreferrer">GREM</a> — malware reverse engineering.</li>
+                            <li><a href="https://learn.microsoft.com/en-us/credentials/certifications/security-operations-analyst/" target="_blank" rel="noopener noreferrer">SC-200</a> — Microsoft security operations.</li>
+                            <li><a href="https://www.eccouncil.org/train-certify/ec-council-certified-incident-handler-ecih/" target="_blank" rel="noopener noreferrer">ECIH</a> — incident handling.</li>
+                            <li><a href="https://www.eccouncil.org/train-certify/computer-hacking-forensic-investigator-chfi/" target="_blank" rel="noopener noreferrer">CHFI</a> — digital forensics.</li>
+                        </ul></div>
+                        <div><h3>Hands-on learning</h3><ul class="linked-list">
+                            <li><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener noreferrer">Microsoft Learn</a></li>
+                            <li><a href="https://www.sans.org/cyber-security-courses/?focus-area=digital-forensics" target="_blank" rel="noopener noreferrer">SANS DFIR training</a></li>
+                            <li><a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> and <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a></li>
+                            <li><a href="https://www.cisa.gov/cybersecurity-training-exercises" target="_blank" rel="noopener noreferrer">CISA training and exercises</a></li>
+                        </ul></div>
+                        <div><h3>Working communities</h3><ul class="linked-list">
+                            <li><a href="https://www.first.org/" target="_blank" rel="noopener noreferrer">FIRST</a> — incident-response teams and standards.</li>
+                            <li><a href="https://isc.sans.edu/" target="_blank" rel="noopener noreferrer">SANS Internet Storm Center</a> — daily operational analysis.</li>
+                            <li><a href="https://www.dfir.training/" target="_blank" rel="noopener noreferrer">DFIR Training</a> — tools, events, and learning references.</li>
+                            <li><a href="https://bsides.org/" target="_blank" rel="noopener noreferrer">Security BSides</a> — practitioner-led local events.</li>
+                        </ul></div>
+                    </div>
+                </section>
 
-                <div class="content-section">
-                    <h3>Microsoft Security Solutions</h3>
-                    
-                    <h4>Microsoft Sentinel</h4>
-                    <p>Microsoft Sentinel is a cloud-native SIEM solution that delivers scalable, cost-efficient security across multicloud and multiplatform environments. It combines AI, automation, and threat intelligence to support threat detection, investigation, response, and proactive hunting. Microsoft Sentinel SIEM empowers analysts to anticipate and stop attacks across clouds and platforms, faster and with greater precision.</p>
-                    <ul>
-                        <li>Collect data across all users, devices, applications, and infrastructure, both on-premises and in multiple clouds</li>
-                        <li>Detect previously undetected threats and minimize false positives using Microsoft's analytics and unparalleled threat intelligence</li>
-                        <li>Investigate threats with artificial intelligence and hunt for suspicious activities at scale</li>
-                        <li>Automate common tasks and simplify security orchestration with playbooks that integrate with Azure services</li>
-                        <li>Security content packaged in SIEM solutions that enable you to ingest, monitor, alert, hunt, investigate, and respond</li>
-                        <li>Unified experience in the Microsoft Defender portal for comprehensive security operations</li>
-                    </ul>
+                <section class="content-section resource-section" id="legal">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">COORDINATION</span><h2>Legal, regulatory, and external reporting</h2></div>
+                        <p>Notification duties depend on jurisdiction, sector, contract, data type, and materiality. Engage counsel and privacy leadership early; do not infer reporting clocks from a generic checklist.</p>
+                    </div>
+                    <div class="resource-columns">
+                        <div><h3>Authoritative starting points</h3><ul class="linked-list">
+                            <li><a href="https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en" target="_blank" rel="noopener noreferrer">EU data protection and GDPR</a></li>
+                            <li><a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener noreferrer">California CCPA/CPRA</a></li>
+                            <li><a href="https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html" target="_blank" rel="noopener noreferrer">HHS HIPAA breach notification</a></li>
+                            <li><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI Security Standards document library</a></li>
+                        </ul></div>
+                        <div><h3>Reporting and coordination</h3><ul class="linked-list">
+                            <li><a href="https://www.ic3.gov/" target="_blank" rel="noopener noreferrer">FBI Internet Crime Complaint Center</a></li>
+                            <li><a href="https://www.cisa.gov/report" target="_blank" rel="noopener noreferrer">Report an incident to CISA</a></li>
+                            <li><a href="https://www.secretservice.gov/investigations/cyber" target="_blank" rel="noopener noreferrer">U.S. Secret Service Cyber Investigations</a></li>
+                        </ul></div>
+                    </div>
+                </section>
 
-                    <h4>Microsoft Defender for Endpoint</h4>
-                    <p>Enterprise endpoint security platform designed to help prevent, detect, investigate, and respond to advanced threats.</p>
-                    <ul>
-                        <li>Behavioral-based detection and EDR capabilities</li>
-                        <li>Automated investigation and remediation</li>
-                        <li>Advanced hunting with Kusto Query Language (KQL)</li>
-                        <li>Attack surface reduction rules</li>
-                        <li>Threat and vulnerability management</li>
-                    </ul>
-
-                    <h4>Microsoft Defender for Office 365</h4>
-                    <p>Protection against advanced threats in email and collaboration tools.</p>
-                    <ul>
-                        <li>Anti-phishing and anti-malware protection</li>
-                        <li>Safe Links and Safe Attachments</li>
-                        <li>Automated investigation and response for email threats</li>
-                        <li>Threat Explorer for email security analysis</li>
-                    </ul>
-
-                    <h4>Microsoft Defender for Cloud</h4>
-                    <p>Cloud security posture management and workload protection for multi-cloud and hybrid environments.</p>
-                    <ul>
-                        <li>Cloud security posture management (CSPM)</li>
-                        <li>Cloud workload protection platform (CWPP)</li>
-                        <li>Security recommendations and compliance tracking</li>
-                        <li>Integration with Azure, AWS, and Google Cloud</li>
-                    </ul>
-
-                    <h4>Azure AD Identity Protection</h4>
-                    <p>Automated detection and remediation of identity-based risks.</p>
-                    <ul>
-                        <li>Risk-based Conditional Access policies</li>
-                        <li>Impossible travel and anomalous activity detection</li>
-                        <li>Password spray and credential leak detection</li>
-                        <li>Integration with Azure AD and Microsoft 365</li>
-                    </ul>
-
-                    <h4>Microsoft Purview</h4>
-                    <p>Unified data governance and compliance solutions.</p>
-                    <ul>
-                        <li>Data Loss Prevention (DLP) policies</li>
-                        <li>Information protection and classification</li>
-                        <li>Insider risk management</li>
-                        <li>eDiscovery and content search</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Essential Tools</h3>
-
-                    <h4>Detection and Analysis</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tool</th>
-                                <th>Purpose</th>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Microsoft Sentinel</td>
-                                <td>SIEM and security orchestration</td>
-                                <td>Commercial</td>
-                            </tr>
-                            <tr>
-                                <td>Wireshark</td>
-                                <td>Network protocol analyzer</td>
-                                <td>Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>Zeek (formerly Bro)</td>
-                                <td>Network security monitoring</td>
-                                <td>Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>Suricata</td>
-                                <td>IDS/IPS and network security monitoring</td>
-                                <td>Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>Microsoft Defender for Endpoint / CrowdStrike Falcon</td>
-                                <td>Endpoint visibility, detection, investigation, and response</td>
-                                <td>Commercial</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Forensics and Investigation</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tool</th>
-                                <th>Purpose</th>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>FTK Imager</td>
-                                <td>Disk imaging and forensic acquisition</td>
-                                <td>Free</td>
-                            </tr>
-                            <tr>
-                                <td>Autopsy</td>
-                                <td>Digital forensics platform</td>
-                                <td>Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>Volatility</td>
-                                <td>Memory forensics framework</td>
-                                <td>Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>KAPE</td>
-                                <td>Triage and evidence collection</td>
-                                <td>Free</td>
-                            </tr>
-                            <tr>
-                                <td>X-Ways Forensics</td>
-                                <td>Comprehensive forensic analysis</td>
-                                <td>Commercial</td>
-                            </tr>
-                            <tr>
-                                <td>Sleuth Kit</td>
-                                <td>File system and disk analysis</td>
-                                <td>Open Source</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Malware Analysis</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tool</th>
-                                <th>Purpose</th>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>VirusTotal</td>
-                                <td>Multi-scanner malware analysis</td>
-                                <td>Free/Commercial</td>
-                            </tr>
-                            <tr>
-                                <td>Any.run</td>
-                                <td>Interactive malware sandbox</td>
-                                <td>Free/Commercial</td>
-                            </tr>
-                            <tr>
-                                <td>IDA Pro / Ghidra</td>
-                                <td>Reverse engineering and disassembly</td>
-                                <td>Commercial/Open Source</td>
-                            </tr>
-                            <tr>
-                                <td>PEStudio</td>
-                                <td>Malware initial assessment</td>
-                                <td>Free</td>
-                            </tr>
-                            <tr>
-                                <td>Cuckoo Sandbox</td>
-                                <td>Automated malware analysis</td>
-                                <td>Open Source</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <h3>Threat Intelligence Sources</h3>
-
-                    <h4>Commercial Threat Intelligence</h4>
-                    <ul>
-                        <li><strong>Microsoft Threat Intelligence:</strong> Integrated threat intelligence across Microsoft security products</li>
-                        <li><strong>Recorded Future:</strong> Real-time threat intelligence platform</li>
-                        <li><strong>CrowdStrike Intelligence:</strong> Adversary and threat intelligence</li>
-                        <li><strong>Mandiant Threat Intelligence:</strong> APT and threat actor intelligence</li>
-                        <li><strong>Anomali:</strong> Threat intelligence platform and marketplace</li>
-                    </ul>
-
-                    <h4>Open Source Intelligence (OSINT)</h4>
-                    <ul>
-                        <li><strong>MISP (Malware Information Sharing Platform):</strong> Threat intelligence sharing platform</li>
-                        <li><strong>AlienVault OTX:</strong> Open threat exchange community</li>
-                        <li><strong>Abuse.ch:</strong> Various threat intelligence feeds (URLhaus, MalwareBazaar, etc.)</li>
-                        <li><strong>Spamhaus:</strong> IP and domain blocklists</li>
-                        <li><strong>VirusTotal:</strong> File and URL analysis with community intelligence</li>
-                        <li><strong>Shodan:</strong> Internet-connected device search engine</li>
-                    </ul>
-
-                    <h4>Government and Information Sharing</h4>
-                    <ul>
-                        <li><strong>US-CERT:</strong> Alerts and advisories from CISA</li>
-                        <li><strong>FBI IC3:</strong> Internet Crime Complaint Center</li>
-                        <li><strong>ISACs:</strong> Industry-specific information sharing centers</li>
-                        <li><strong>MS-ISAC:</strong> Multi-State Information Sharing and Analysis Center</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Training and Certifications</h3>
-
-                    <h4>Professional Certifications</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Certification</th>
-                                <th>Provider</th>
-                                <th>Focus Area</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>GCIH</td>
-                                <td>GIAC/SANS</td>
-                                <td>Incident handling and response</td>
-                            </tr>
-                            <tr>
-                                <td>GCFA</td>
-                                <td>GIAC/SANS</td>
-                                <td>Advanced digital forensics</td>
-                            </tr>
-                            <tr>
-                                <td>GREM</td>
-                                <td>GIAC/SANS</td>
-                                <td>Reverse engineering and malware analysis</td>
-                            </tr>
-                            <tr>
-                                <td>CISSP</td>
-                                <td>(ISC)²</td>
-                                <td>Information security management</td>
-                            </tr>
-                            <tr>
-                                <td>CISM</td>
-                                <td>ISACA</td>
-                                <td>Information security management</td>
-                            </tr>
-                            <tr>
-                                <td>SC-200</td>
-                                <td>Microsoft</td>
-                                <td>Security Operations Analyst</td>
-                            </tr>
-                            <tr>
-                                <td>AZ-500</td>
-                                <td>Microsoft</td>
-                                <td>Azure Security Engineer</td>
-                            </tr>
-                            <tr>
-                                <td>OSCP</td>
-                                <td>Offensive Security</td>
-                                <td>Penetration testing</td>
-                            </tr>
-                            <tr>
-                                <td>CEH</td>
-                                <td>EC-Council</td>
-                                <td>Certified Ethical Hacker</td>
-                            </tr>
-                            <tr>
-                                <td>CHFI</td>
-                                <td>EC-Council</td>
-                                <td>Computer Hacking Forensic Investigator</td>
-                            </tr>
-                            <tr>
-                                <td>ECIH</td>
-                                <td>EC-Council</td>
-                                <td>EC-Council Certified Incident Handler</td>
-                            </tr>
-                            <tr>
-                                <td>CND</td>
-                                <td>EC-Council</td>
-                                <td>Certified Network Defender</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Training Resources</h4>
-                    <ul>
-                        <li><strong>Microsoft Learn:</strong> Free training on Microsoft security technologies</li>
-                        <li><strong>EC-Council:</strong> Global leader in cybersecurity certification and training (CEH, CHFI, ECIH, CND)</li>
-                        <li><strong>SANS Institute:</strong> Comprehensive incident response and forensics training</li>
-                        <li><strong>Cybrary:</strong> Free and paid cybersecurity training</li>
-                        <li><strong>Offensive Security:</strong> Hands-on penetration testing training</li>
-                        <li><strong>TryHackMe / HackTheBox:</strong> Interactive security learning platforms</li>
-                        <li><strong>CISA Training:</strong> Free training from US Cybersecurity and Infrastructure Security Agency</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Communities and Information Sharing</h3>
-
-                    <h4>Professional Communities</h4>
-                    <ul>
-                        <li><strong>Microsoft Security Community:</strong> Forums and resources for Microsoft security products</li>
-                        <li><strong>FIRST (Forum of Incident Response and Security Teams):</strong> Global incident response community</li>
-                        <li><strong>OWASP:</strong> Open Web Application Security Project</li>
-                        <li><strong>Cloud Security Alliance:</strong> Cloud security best practices and research</li>
-                        <li><strong>/r/netsec, /r/blueteam (Reddit):</strong> Active security communities</li>
-                    </ul>
-
-                    <h4>Conferences and Events</h4>
-                    <ul>
-                        <li><strong>Microsoft Ignite / Build:</strong> Microsoft technology and security conferences</li>
-                        <li><strong>Black Hat / DEF CON:</strong> Premier security conferences</li>
-                        <li><strong>RSA Conference:</strong> Large security industry event</li>
-                        <li><strong>SANS Summit Series:</strong> Regional security summits</li>
-                        <li><strong>BSides Events:</strong> Community-driven security conferences</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Documentation Templates</h3>
-
-                    <h4>Essential Documents</h4>
-                    <ul>
-                        <li><strong>Incident Response Plan:</strong> Comprehensive procedures, roles, and communication plans</li>
-                        <li><strong>Incident Report Template:</strong> Standardized format for documenting incidents</li>
-                        <li><strong>Communication Templates:</strong> Pre-approved messaging for various stakeholders</li>
-                        <li><strong>Evidence Collection Log:</strong> Chain of custody documentation</li>
-                        <li><strong>Post-Incident Review Template:</strong> Lessons learned documentation</li>
-                        <li><strong>Runbooks and Playbooks:</strong> Step-by-step procedures for specific incidents</li>
-                        <li><strong>Contact Lists:</strong> Emergency contacts, escalation paths, external resources</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Regulatory and Legal Resources</h3>
-
-                    <h4>Data Protection and Privacy</h4>
-                    <ul>
-                        <li><strong>GDPR:</strong> EU General Data Protection Regulation</li>
-                        <li><strong>CCPA/CPRA:</strong> California Consumer Privacy Act and Rights Act</li>
-                        <li><strong>HIPAA:</strong> Health Insurance Portability and Accountability Act</li>
-                        <li><strong>PCI DSS:</strong> Payment Card Industry Data Security Standard</li>
-                        <li><strong>SOX:</strong> Sarbanes-Oxley Act</li>
-                    </ul>
-
-                    <h4>Law Enforcement Resources</h4>
-                    <ul>
-                        <li><strong>FBI Cyber Division:</strong> Federal cybercrime investigation</li>
-                        <li><strong>IC3 (Internet Crime Complaint Center):</strong> Report cybercrime to FBI</li>
-                        <li><strong>Secret Service ECTF:</strong> Electronic Crimes Task Forces</li>
-                        <li><strong>Local Cyber Task Forces:</strong> Regional law enforcement cyber units</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Recommended Reading</h3>
-
-                    <h4>Books</h4>
-                    <ul>
-                        <li><strong>"Incident Response & Computer Forensics"</strong> by Luttgens, Pepe, and Mandia</li>
-                        <li><strong>"The Art of Memory Forensics"</strong> by Case, Levy, and Richard</li>
-                        <li><strong>"Digital Forensics & Incident Response"</strong> by Gerald Johansen</li>
-                        <li><strong>"Blue Team Handbook: Incident Response Edition"</strong> by Murdock</li>
-                        <li><strong>"Intelligence-Driven Incident Response"</strong> by Scott Roberts and Rebekah Brown</li>
-                    </ul>
-
-                    <h4>Blogs and Publications</h4>
-                    <ul>
-                        <li><strong>Microsoft Security Blog:</strong> Latest security research and threat intelligence from Microsoft</li>
-                        <li><strong>Palo Alto Networks Unit 42 Blog:</strong> In-depth incident response reports, threat research, and insights</li>
-                        <li><strong>Rapid7 Blog – Incident Response Research:</strong> Post-incident analysis, threat intelligence, and IR findings</li>
-                        <li><strong>CrowdStrike Blog – Incident Response & Detection:</strong> IR-centric content</li>
-                        <li><strong>SANS Internet Storm Center:</strong> Daily threat intelligence and analysis</li>
-                        <li><strong>EC-Council – <a href="https://www.eccouncil.org/cybersecurity-exchange/incident-handling/ai-incident-response/" target="_blank" rel="noopener noreferrer">AI Incident Response: Modern Playbook and Framework</a>:</strong> A modern approach to detection, playbook-driven response, automation, and continuous improvement</li>
-                    </ul>
-                </div>
+                <section class="content-section resource-section" id="reading">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">READING</span><h2>Technical reading</h2></div>
+                        <p>A mix of durable references and continuously updated field research.</p>
+                    </div>
+                    <div class="resource-columns">
+                        <div><h3>Books</h3><ul>
+                            <li><cite>Incident Response &amp; Computer Forensics</cite> — Luttgens, Pepe, and Mandia</li>
+                            <li><cite>The Art of Memory Forensics</cite> — Case, Levy, Walters, and Richard</li>
+                            <li><cite>Digital Forensics and Incident Response</cite> — Gerald Johansen</li>
+                            <li><cite>Intelligence-Driven Incident Response</cite> — Roberts and Brown</li>
+                        </ul></div>
+                        <div><h3>Blogs and publications</h3><ul class="linked-list">
+                            <li><a href="https://www.microsoft.com/en-us/security/blog/" target="_blank" rel="noopener noreferrer">Microsoft Security Blog</a></li>
+                            <li><a href="https://unit42.paloaltonetworks.com/" target="_blank" rel="noopener noreferrer">Palo Alto Networks Unit 42</a></li>
+                            <li><a href="https://cloud.google.com/blog/topics/threat-intelligence" target="_blank" rel="noopener noreferrer">Google Threat Intelligence</a></li>
+                            <li><a href="https://www.crowdstrike.com/en-us/blog/category/threat-intel-research/" target="_blank" rel="noopener noreferrer">CrowdStrike threat intelligence research</a></li>
+                            <li><a href="https://www.eccouncil.org/cybersecurity-exchange/incident-handling/ai-incident-response/" target="_blank" rel="noopener noreferrer">EC-Council: AI Incident Response—Modern Playbook and Framework</a> — June 9, 2026.</li>
+                        </ul></div>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Incident Response Framework | Created by Leandro Rocha</p>
+            <p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p>
             <p class="footer-note">For education, research, and professional reference.</p>
         </div>
     </footer>
