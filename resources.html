@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A field-oriented library of incident response frameworks, investigation tools, evidence guidance, templates, and technical reading for working defenders.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <link rel="canonical" href="https://lrinfosec.com/IncidentResponse/resources.html">
+    <meta property="og:title" content="Responder Resources | IR Framework">
+    <meta property="og:description" content="Frameworks, tools, field notes, and reusable artifacts for incident detection and response.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://lrinfosec.com/IncidentResponse/resources.html">
     <title>Incident Detection &amp; Response | Resources</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
-            <div class="nav-logo">
+            <a class="nav-logo nav-logo-link" href="index.html" aria-label="IR Framework home">
                 <span class="logo-icon" aria-hidden="true">🛡️</span>
                 <span class="logo-text">IR Framework</span>
-            </div>
+            </a>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="detection.html">Detection</a></li>
@@ -34,7 +42,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <section class="resource-library">
             <div class="container">
                 <nav class="resource-index" aria-label="Resources on this page">
@@ -228,7 +236,7 @@
                     <div class="resource-columns">
                         <div><h3>Research and platforms</h3><ul class="linked-list">
                             <li><a href="https://www.microsoft.com/en-us/security/security-insider/intelligence-reports" target="_blank" rel="noopener noreferrer">Microsoft Threat Intelligence</a></li>
-                            <li><a href="https://cloud.google.com/security/resources/mandiant" target="_blank" rel="noopener noreferrer">Google Cloud Mandiant</a></li>
+                            <li><a href="https://cloud.google.com/security/mandiant" target="_blank" rel="noopener noreferrer">Google Cloud Mandiant</a></li>
                             <li><a href="https://www.crowdstrike.com/en-us/global-threat-report/" target="_blank" rel="noopener noreferrer">CrowdStrike threat research</a></li>
                             <li><a href="https://www.recordedfuture.com/" target="_blank" rel="noopener noreferrer">Recorded Future</a></li>
                         </ul></div>
@@ -342,6 +350,7 @@
         <div class="container">
             <p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p>
             <p class="footer-note">For education, research, and professional reference.</p>
+            <div class="site-footer-links"><a href="https://lrinfosec.com/">LR InfoSec Lab</a><a href="https://github.com/leandroer/IncidentResponse">GitHub repository</a><a href="resources.html">Responder resources</a><a href="security.txt">Security</a></div>
         </div>
     </footer>
 

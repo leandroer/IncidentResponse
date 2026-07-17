@@ -1,0 +1,5 @@
+Contact: https://github.com/leandroer/IncidentResponse/security/advisories/new
+Expires: 2027-07-17T23:59:59Z
+Preferred-Languages: en
+Canonical: https://lrinfosec.com/IncidentResponse/.well-known/security.txt
+Policy: https://github.com/leandroer/IncidentResponse/security/policy

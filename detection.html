@@ -1,230 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Detection & Response | Detection Techniques</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practical detection-engineering guidance covering telemetry, detections-as-code, triage, ATT&CK mapping, validation, and security operations metrics.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <link rel="canonical" href="https://lrinfosec.com/IncidentResponse/detection.html">
+    <meta property="og:title" content="Detection Engineering | IR Framework"><meta property="og:description" content="Build defensible detections from telemetry requirements through validation and coverage measurement."><meta property="og:type" content="article"><meta property="og:url" content="https://lrinfosec.com/IncidentResponse/detection.html">
+    <title>Detection Engineering | IR Framework</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon">🛡️</span>
-                <span class="logo-text">IR Framework</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="detection.html" class="active">Detection</a></li>
-                <li><a href="response.html">Response</a></li>
-                <li><a href="playbooks.html">Playbooks</a></li>
-                <li><a href="resources.html">Resources</a></li>
-            </ul>
-            <button class="mobile-menu-toggle">☰</button>
-        </div>
-    </nav>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="navbar" aria-label="Primary navigation"><div class="nav-container"><a class="nav-logo nav-logo-link" href="index.html" aria-label="IR Framework home"><span class="logo-icon" aria-hidden="true">🛡️</span><span class="logo-text">IR Framework</span></a><ul class="nav-menu"><li><a href="index.html">Home</a></li><li><a href="detection.html" class="active" aria-current="page">Detection</a></li><li><a href="response.html">Response</a></li><li><a href="playbooks.html">Playbooks</a></li><li><a href="resources.html">Resources</a></li></ul><button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">☰</button></div></nav>
+    <header class="hero hero-compact"><div class="container"><p class="eyebrow">DETECTION ENGINEERING</p><h1>Build evidence, not alert volume</h1><p class="hero-subtitle">Define the decision, identify the required telemetry, implement the analytic, and prove that it works.</p><div class="version-bar"><span>Last reviewed: July 17, 2026</span><span>Audience: SOC, detection, threat hunting, platform engineering</span></div></div></header>
 
-    <header class="hero">
-        <div class="container">
-            <h1>Incident Detection Techniques</h1>
-            <p class="hero-subtitle">Advanced methods for identifying security incidents</p>
-        </div>
-    </header>
+    <main id="main-content"><section><div class="container">
+        <nav class="page-index" aria-label="Detection sections"><h2>On this page</h2><div class="page-index-links"><a href="#principles">Principles</a><a href="#telemetry">Telemetry</a><a href="#lifecycle">Engineering lifecycle</a><a href="#example">Worked example</a><a href="#triage">Triage</a><a href="#metrics">Metrics</a></div></nav>
 
-    <main>
-        <section>
-            <div class="container">
-                <div class="content-section">
-                    <h3>Detection Overview</h3>
-                    <p>Effective incident detection is the cornerstone of a robust security posture. Early detection minimizes damage, reduces recovery time, and limits the scope of security incidents. Modern detection strategies employ multiple layers of monitoring, correlation, and analysis to identify threats across the entire attack surface.</p>
-                    
-                    <div class="info-box">
-                        <strong>Key Principle:</strong> Detection must be continuous, automated, and integrated across all security tools to provide comprehensive visibility into potential threats.
-                    </div>
-                </div>
+        <div class="content-section operational-section" id="principles"><span class="resource-tag">01 / PRINCIPLES</span><h2>Detection begins with a response decision</h2><p>A detection is valuable when it gives an analyst enough reliable context to decide whether to investigate, contain, escalate, or dismiss. A rule without data ownership, validation, runbook context, and an expected responder action is only a query.</p><div class="three-column"><div class="engineering-card"><h3>Behavior before indicators</h3><p>Use hashes, domains, and IP addresses for enrichment and short-lived blocking. Anchor durable analytics in adversary behavior and environmental context.</p></div><div class="engineering-card"><h3>Evidence before severity</h3><p>Severity should reflect confidence, asset or identity criticality, blast radius, privilege, data exposure, and active impact—not a vendor default.</p></div><div class="engineering-card"><h3>Test before production</h3><p>Validate positive, negative, boundary, performance, suppression, and data-loss cases before enabling automated response.</p></div></div></div>
 
-                <div class="content-section">
-                    <h3>Detection Sources</h3>
-                    
-                    <h4>1. Security Information and Event Management (SIEM)</h4>
-                    <p>SIEM systems aggregate and correlate logs from multiple sources to identify patterns indicative of security incidents. They provide centralized visibility and enable real-time threat detection through rule-based and behavioral analytics.</p>
-                    
-                    <p><strong>Key Capabilities:</strong></p>
-                    <ul>
-                        <li>Log aggregation from endpoints, network devices, applications, and cloud services</li>
-                        <li>Real-time correlation of events across multiple data sources</li>
-                        <li>Pre-built and custom detection rules for known attack patterns</li>
-                        <li>Threat intelligence integration for IOC matching</li>
-                        <li>Dashboards and alerting for security operations teams</li>
-                    </ul>
+        <div class="content-section operational-section" id="telemetry"><span class="resource-tag">02 / TELEMETRY</span><h2>Collect the control plane and the workload</h2><div class="table-scroll" tabindex="0" aria-label="Detection telemetry matrix, horizontally scrollable"><table><caption>Core telemetry and the questions it can answer</caption><thead><tr><th scope="col">Domain</th><th scope="col">Required evidence</th><th scope="col">Questions supported</th><th scope="col">Common failure</th></tr></thead><tbody>
+        <tr><td>Identity</td><td>Sign-ins, MFA, sessions, risk, role/group changes, OAuth grants</td><td>Who authenticated, how, from where, with what privilege, and what changed?</td><td>Collecting failures but not successful sessions or administrative changes</td></tr>
+        <tr><td>Endpoint</td><td>Process, file, registry, persistence, network, logon, sensor health</td><td>What executed, under which identity, with what lineage and effect?</td><td>Short retention or missing server and privileged-workstation coverage</td></tr>
+        <tr><td>Network</td><td>DNS, proxy, firewall, flow, packet metadata, VPN, load balancer</td><td>Which systems communicated, through what path, and at what volume?</td><td>No east-west visibility or inconsistent asset attribution</td></tr>
+        <tr><td>Cloud and SaaS</td><td>Control-plane audit, data access, workload, storage, secrets, email and collaboration logs</td><td>What configuration, access, sharing, or workload action occurred?</td><td>Management events retained while data-plane events are absent</td></tr>
+        <tr><td>Containers</td><td>Kubernetes audit, admission, runtime, registry, image and node evidence</td><td>Who changed the cluster, what ran, and whether the image or workload drifted?</td><td>Posture findings without runtime or API audit context</td></tr>
+        </tbody></table></div><div class="warning-box"><strong>Telemetry health is a detection:</strong> alert on disabled audit sources, ingestion delay, parser failure, unexpected volume changes, sensor loss, retention changes, and time synchronization drift.</div></div>
 
-                    <p><strong>Common SIEM Solutions:</strong> Microsoft Sentinel, Splunk Enterprise Security, IBM QRadar, Elastic Security, Chronicle Security</p>
+        <div class="content-section operational-section" id="lifecycle"><span class="resource-tag">03 / LIFECYCLE</span><h2>Run detections as versioned engineering assets</h2><div class="workflow" aria-label="Detection engineering lifecycle"><div class="workflow-step"><strong>Hypothesis</strong><span>Adversary behavior and responder decision.</span></div><div class="workflow-step"><strong>Data contract</strong><span>Sources, fields, owner, latency, and retention.</span></div><div class="workflow-step"><strong>Analytic</strong><span>Logic, ATT&amp;CK mapping, exclusions, and enrichment.</span></div><div class="workflow-step"><strong>Test</strong><span>Positive, negative, boundary, and performance cases.</span></div><div class="workflow-step"><strong>Deploy</strong><span>Peer review, version, monitoring, and rollback.</span></div><div class="workflow-step"><strong>Measure</strong><span>Precision, coverage, response outcome, and drift.</span></div></div>
+        <h3>Minimum detection record</h3><ul><li>Objective and expected responder decision</li><li>ATT&amp;CK technique and relevant data components</li><li>Query/rule owner, version, review date, and repository location</li><li>Required fields, normalization assumptions, latency, and retention</li><li>Known false positives, exclusions, and abuse cases</li><li>Test procedure, expected result, severity logic, and runbook link</li><li>Rollback, suppression, health monitoring, and expiration criteria</li></ul></div>
 
-                    <h4>2. Endpoint Detection and Response (EDR)</h4>
-                    <p>EDR solutions provide deep visibility into endpoint activity, monitoring processes, file operations, network connections, and registry modifications. They enable rapid detection of malicious behavior and facilitate response actions directly on affected endpoints.</p>
-                    
-                    <p><strong>Detection Capabilities:</strong></p>
-                    <ul>
-                        <li>Behavioral analysis to identify anomalous process execution</li>
-                        <li>File integrity monitoring and hash-based detection</li>
-                        <li>Network connection monitoring and C2 detection</li>
-                        <li>Memory analysis for fileless malware detection</li>
-                        <li>Automated threat hunting capabilities</li>
-                    </ul>
+        <div class="content-section operational-section" id="example"><span class="resource-tag">04 / WORKED EXAMPLE</span><h2>Example: shadow-copy deletion behavior</h2><p>This Microsoft Defender XDR advanced-hunting example looks for common recovery-inhibition commands. It is a starting hypothesis, not a production-ready detection. Validate fields, legitimate administrative tooling, and execution context in your environment.</p><pre class="code-example"><code>DeviceProcessEvents
+| where Timestamp &gt; ago(1h)
+| where FileName in~ ("vssadmin.exe", "wbadmin.exe", "wmic.exe")
+| where ProcessCommandLine has_any
+    ("delete shadows", "delete catalog", "shadowcopy delete")
+| project Timestamp, DeviceName, AccountName,
+          InitiatingProcessFileName, FileName, ProcessCommandLine,
+          InitiatingProcessSHA256
+| order by Timestamp asc</code></pre>
+        <div class="two-column"><div class="engineering-card"><h3>Required context</h3><ul><li>Asset role and criticality</li><li>Initiating process and signer</li><li>User privilege and logon context</li><li>Change window or backup activity</li><li>Related credential access, discovery, and lateral movement</li></ul></div><div class="engineering-card"><h3>Validation tests</h3><ul><li>Approved backup administration</li><li>Benign command variants and case changes</li><li>Encoded or indirect execution</li><li>Missing command-line telemetry</li><li>Query cost and expected event volume</li></ul></div></div></div>
 
-                    <p><strong>Leading EDR Platforms:</strong> Microsoft Defender for Endpoint, CrowdStrike Falcon, SentinelOne, Carbon Black, Cortex XDR</p>
+        <div class="content-section operational-section" id="triage"><span class="resource-tag">05 / TRIAGE</span><h2>Move from alert to incident hypothesis</h2><ol><li><strong>Validate the source:</strong> confirm telemetry freshness, parser behavior, event identity, and sensor health.</li><li><strong>Establish context:</strong> asset, identity, privilege, business service, expected behavior, and recent change.</li><li><strong>Correlate behavior:</strong> search identity, endpoint, network, cloud, SaaS, and threat-intelligence evidence.</li><li><strong>State the hypothesis:</strong> known facts, assumptions, confidence, alternative explanations, and missing evidence.</li><li><strong>Choose the action:</strong> dismiss, monitor, investigate, escalate, or contain—with an owner and validation step.</li></ol><div class="info-box"><strong>Impossible travel:</strong> treat it as a risk signal. VPN egress, mobile routing, shared infrastructure, and token reuse can produce misleading location changes. Correlate device, authentication method, session, user agent, ASN, activity, and identity history.</div></div>
 
-                    <h4>3. Network Detection and Response (NDR)</h4>
-                    <p>NDR systems analyze network traffic to identify malicious activity, lateral movement, data exfiltration, and command-and-control communications. They provide visibility into east-west traffic that traditional perimeter defenses miss.</p>
-                    
-                    <p><strong>Detection Methods:</strong></p>
-                    <ul>
-                        <li>Deep packet inspection for payload analysis</li>
-                        <li>Flow analysis to identify communication patterns</li>
-                        <li>Protocol anomaly detection</li>
-                        <li>Machine learning for baseline deviations</li>
-                        <li>Encrypted traffic analysis without decryption</li>
-                    </ul>
+        <div class="content-section operational-section" id="metrics"><span class="resource-tag">06 / MEASUREMENT</span><h2>Measure system performance, not analyst activity</h2><div class="table-scroll" tabindex="0" aria-label="Detection metrics table, horizontally scrollable"><table><caption>Metrics tied to useful outcomes</caption><thead><tr><th scope="col">Metric</th><th scope="col">What it reveals</th><th scope="col">Guardrail</th></tr></thead><tbody><tr><td>Time to triage / investigate / contain</td><td>Where evidence or authority creates delay</td><td>Segment by incident type and severity; averages hide outliers</td></tr><tr><td>Detection precision</td><td>Proportion of reviewed signals that support action</td><td>Do not improve precision by suppressing uncertain high-impact behavior</td></tr><tr><td>Validation pass rate</td><td>Whether analytics still detect tested behavior</td><td>Include parser and telemetry-loss tests</td></tr><tr><td>ATT&amp;CK and data coverage</td><td>Known defensive visibility</td><td>Technique counts do not measure effectiveness</td></tr><tr><td>Telemetry availability and latency</td><td>Whether evidence is present when needed</td><td>Measure by source, tenant, region, and critical asset class</td></tr><tr><td>Incident-derived improvements</td><td>Whether lessons become tested changes</td><td>Close only after verification</td></tr></tbody></table></div></div>
+    </div></section></main>
 
-                    <h4>4. Cloud Security Posture Management (CSPM)</h4>
-                    <p>CSPM tools continuously monitor cloud environments for misconfigurations, policy violations, and suspicious activities that could lead to security incidents.</p>
-                    
-                    <p><strong>Detection Focus Areas:</strong></p>
-                    <ul>
-                        <li>Misconfigured storage buckets and databases</li>
-                        <li>Overly permissive IAM policies</li>
-                        <li>Unencrypted data stores</li>
-                        <li>Anomalous API calls and access patterns</li>
-                        <li>Compliance violations</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Detection Techniques</h3>
-
-                    <h4>Signature-Based Detection</h4>
-                    <p>Identifies known threats by matching patterns, hashes, or signatures against a database of known malicious indicators. This method is highly effective for detecting known malware and attack patterns but cannot detect new or modified threats.</p>
-                    
-                    <div class="info-box">
-                        <strong>Best Practice:</strong> Regularly update signature databases and integrate threat intelligence feeds to maintain effectiveness against evolving threats.
-                    </div>
-
-                    <h4>Behavioral Analysis</h4>
-                    <p>Establishes baselines of normal system and user behavior, then detects deviations that may indicate compromise. This approach can identify zero-day attacks and insider threats that signature-based methods miss.</p>
-                    
-                    <p><strong>Behavioral Indicators:</strong></p>
-                    <ul>
-                        <li>Unusual process execution chains or parent-child relationships</li>
-                        <li>Abnormal network traffic volumes or destinations</li>
-                        <li>Privilege escalation attempts</li>
-                        <li>Anomalous file access patterns</li>
-                        <li>Off-hours authentication from unusual locations</li>
-                    </ul>
-
-                    <h4>Anomaly Detection</h4>
-                    <p>Uses statistical models and machine learning to identify activities that deviate from established norms. Effective for detecting sophisticated attacks that blend in with legitimate traffic.</p>
-
-                    <h4>Threat Intelligence Integration</h4>
-                    <p>Incorporates external threat intelligence feeds to proactively detect indicators of compromise (IOCs) associated with known threat actors and campaigns.</p>
-                    
-                    <p><strong>IOC Types:</strong></p>
-                    <ul>
-                        <li>IP addresses and domains associated with malicious infrastructure</li>
-                        <li>File hashes of known malware</li>
-                        <li>Email addresses used in phishing campaigns</li>
-                        <li>SSL certificate fingerprints</li>
-                        <li>Tactics, techniques, and procedures (TTPs) from threat actor profiles</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Detection Use Cases</h3>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Attack Type</th>
-                                <th>Primary Detection Method</th>
-                                <th>Key Indicators</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Ransomware</td>
-                                <td>EDR, File Integrity Monitoring</td>
-                                <td>Mass file encryption, shadow copy deletion, unusual process execution</td>
-                            </tr>
-                            <tr>
-                                <td>Data Exfiltration</td>
-                                <td>NDR, DLP, SIEM</td>
-                                <td>Large outbound data transfers, connections to unusual destinations, compressed archives</td>
-                            </tr>
-                            <tr>
-                                <td>Lateral Movement</td>
-                                <td>NDR, EDR, SIEM</td>
-                                <td>Pass-the-hash attempts, RDP/SMB connections between workstations, credential access</td>
-                            </tr>
-                            <tr>
-                                <td>Phishing/Credential Theft</td>
-                                <td>Email Security, SIEM</td>
-                                <td>Suspicious email attachments, credential harvesting pages, impossible travel scenarios</td>
-                            </tr>
-                            <tr>
-                                <td>Privilege Escalation</td>
-                                <td>EDR, SIEM</td>
-                                <td>Exploitation of vulnerabilities, unauthorized permission changes, token manipulation</td>
-                            </tr>
-                            <tr>
-                                <td>C2 Communication</td>
-                                <td>NDR, Firewall Logs</td>
-                                <td>Beaconing behavior, connections to known malicious IPs, DNS tunneling</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="content-section">
-                    <h3>Alert Triage and Validation</h3>
-                    <p>Not all alerts indicate genuine security incidents. Effective triage separates true positives from false positives to ensure that response resources focus on real threats.</p>
-
-                    <h4>Triage Process</h4>
-                    <ol style="padding-left: 2rem; color: var(--text-secondary);">
-                        <li><strong>Initial Assessment:</strong> Review alert details, severity, and affected assets</li>
-                        <li><strong>Context Gathering:</strong> Collect related logs, user information, and asset criticality</li>
-                        <li><strong>Validation:</strong> Determine if the alert represents genuine malicious activity</li>
-                        <li><strong>Prioritization:</strong> Assign priority based on severity, scope, and business impact</li>
-                        <li><strong>Assignment:</strong> Route validated incidents to appropriate response teams</li>
-                    </ol>
-
-                    <div class="warning-box">
-                        <strong>Alert Fatigue Warning:</strong> High false positive rates lead to alert fatigue, causing analysts to miss genuine threats. Continuously tune detection rules and implement risk-based prioritization to maintain effectiveness.
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Continuous Improvement</h3>
-                    <p>Detection capabilities must evolve alongside the threat landscape. Implement these practices to maintain effective detection:</p>
-
-                    <ul>
-                        <li><strong>Regular Rule Tuning:</strong> Adjust detection rules based on false positive rates and missed detections</li>
-                        <li><strong>Threat Hunting:</strong> Proactively search for threats that evaded automated detection</li>
-                        <li><strong>Purple Team Exercises:</strong> Simulate attacks to test detection coverage and identify gaps</li>
-                        <li><strong>Metrics and KPIs:</strong> Track mean time to detect (MTTD), false positive rates, and detection coverage</li>
-                        <li><strong>Technology Evaluation:</strong> Assess new detection technologies and approaches</li>
-                        <li><strong>Analyst Training:</strong> Ensure teams stay current with emerging attack techniques</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p>
-            <p class="footer-note">For education, research, and professional reference.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-</body>
-</html>
+    <footer><div class="container"><p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p><p class="footer-note">For education, research, and professional reference.</p><div class="site-footer-links"><a href="https://lrinfosec.com/">LR InfoSec Lab</a><a href="https://github.com/leandroer/IncidentResponse">GitHub repository</a><a href="resources.html">Responder resources</a><a href="security.txt">Security</a></div></div></footer><script src="js/main.js"></script>
+</body></html>

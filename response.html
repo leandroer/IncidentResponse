@@ -1,341 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Detection & Response | Response Procedures</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Operational incident response procedures covering authority, evidence, severity, containment decisions, communications, recovery criteria, and exercises.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <link rel="canonical" href="https://lrinfosec.com/IncidentResponse/response.html"><meta property="og:title" content="Response Procedures | IR Framework"><meta property="og:description" content="Make accountable incident decisions using evidence, authority, safeguards, and measurable recovery criteria."><meta property="og:type" content="article"><meta property="og:url" content="https://lrinfosec.com/IncidentResponse/response.html">
+    <title>Response Procedures | IR Framework</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon">🛡️</span>
-                <span class="logo-text">IR Framework</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="detection.html">Detection</a></li>
-                <li><a href="response.html" class="active">Response</a></li>
-                <li><a href="playbooks.html">Playbooks</a></li>
-                <li><a href="resources.html">Resources</a></li>
-            </ul>
-            <button class="mobile-menu-toggle">☰</button>
-        </div>
-    </nav>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="navbar" aria-label="Primary navigation"><div class="nav-container"><a class="nav-logo nav-logo-link" href="index.html" aria-label="IR Framework home"><span class="logo-icon" aria-hidden="true">🛡️</span><span class="logo-text">IR Framework</span></a><ul class="nav-menu"><li><a href="index.html">Home</a></li><li><a href="detection.html">Detection</a></li><li><a href="response.html" class="active" aria-current="page">Response</a></li><li><a href="playbooks.html">Playbooks</a></li><li><a href="resources.html">Resources</a></li></ul><button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">☰</button></div></nav>
+    <header class="hero hero-compact"><div class="container"><p class="eyebrow">INCIDENT COMMAND / TECHNICAL RESPONSE</p><h1>Make accountable response decisions</h1><p class="hero-subtitle">Preserve evidence, control business impact, contain deliberately, and restore trust—not just service availability.</p><div class="version-bar"><span>Aligned to NIST SP 800-61 Rev. 3 and CSF 2.0</span><span>Last reviewed: July 17, 2026</span></div></div></header>
 
-    <header class="hero">
-        <div class="container">
-            <h1>Incident Response Procedures</h1>
-            <p class="hero-subtitle">Structured approaches to managing security incidents</p>
-        </div>
-    </header>
+    <main id="main-content"><section><div class="container">
+        <nav class="page-index" aria-label="Response sections"><h2>On this page</h2><div class="page-index-links"><a href="#prepare">Prepare</a><a href="#activate">Activate</a><a href="#severity">Severity</a><a href="#investigate">Investigate</a><a href="#contain">Contain</a><a href="#recover">Recover</a><a href="#communicate">Communicate</a><a href="#improve">Improve</a></div></nav>
 
-    <main>
-        <section>
-            <div class="container">
-                <div class="content-section">
-                    <h3>Response Framework</h3>
-                    <p>Incident response procedures provide structured guidance for managing security incidents from initial detection through post-incident activities. This framework aligns with NIST SP 800-61 and SANS incident response methodologies, ensuring comprehensive and effective incident management.</p>
-                    
-                    <div class="info-box">
-                        <strong>Response Objective:</strong> Minimize business impact, contain threats rapidly, preserve evidence, and restore normal operations while preventing recurrence.
-                    </div>
-                </div>
+        <div class="content-section operational-section" id="prepare"><span class="resource-tag">01 / PREPARE</span><h2>Build authority and access before the incident</h2><p>NIST SP 800-61 Rev. 3 integrates response across the six functions of CSF 2.0. The operating workflow on this site—prepare, validate, scope, contain, recover, and improve—provides a practical execution layer within that broader risk-management model.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Incident response roles, horizontally scrollable"><table><caption>Minimum incident command roles</caption><thead><tr><th scope="col">Role</th><th scope="col">Accountability</th><th scope="col">Cannot be assumed</th></tr></thead><tbody><tr><td>Incident lead</td><td>Objectives, severity, cadence, decisions, coordination, and closure</td><td>Unlimited authority over production, safety, legal, or public communications</td></tr><tr><td>Technical lead</td><td>Investigation plan, evidence quality, scoping, and technical recommendations</td><td>Business-risk acceptance</td></tr><tr><td>Operations owners</td><td>Execution, dependency knowledge, rollback, recovery, and service validation</td><td>Forensic interpretation</td></tr><tr><td>Scribe / evidence custodian</td><td>UTC timeline, decision record, artifacts, hashes, and transfers</td><td>That chat history is a sufficient case record</td></tr><tr><td>Legal / privacy / communications</td><td>Privilege, notification, disclosure, stakeholder, and regulatory guidance</td><td>Technical incident command</td></tr><tr><td>Executive business owner</td><td>Material risk, business tradeoffs, crisis resources, and external accountability</td><td>Selection of low-level containment commands</td></tr></tbody></table></div>
+        <h3>Prepared capabilities</h3><div class="two-column"><div class="engineering-card"><h3>Operational access</h3><ul><li>Break-glass identities and clean administrative workstations</li><li>EDR, identity, network, cloud, SaaS, backup, and virtualization access</li><li>Protected evidence storage with retention and access logging</li><li>Out-of-band communications independent of primary identity</li></ul></div><div class="engineering-card"><h3>Decision readiness</h3><ul><li>Delegated containment authority and explicit exceptions</li><li>Critical service, data, identity, dependency, and recovery owners</li><li>Legal, privacy, insurer, vendor, communications, and authority contacts</li><li>Tested restoration, credential rotation, and clean-room procedures</li></ul></div></div></div>
 
-                <div class="content-section">
-                    <h3>Phase 1: Preparation</h3>
-                    <p>Preparation is the foundation of effective incident response. Organizations must establish capabilities, processes, and resources before incidents occur to ensure rapid and coordinated response.</p>
+        <div class="content-section operational-section" id="activate"><span class="resource-tag">02 / ACTIVATE</span><h2>Establish control during the first hour</h2><div class="two-column"><div class="engineering-card"><h3>First 15 minutes</h3><ol><li>Validate the signal and preserve the original alert.</li><li>Assign the incident lead, technical lead, scribe, and initial severity.</li><li>Move to a protected channel and use UTC.</li><li>Identify affected identities, assets, services, and short-retention evidence.</li><li>State known facts, assumptions, confidence, and immediate safety constraints.</li></ol></div><div class="engineering-card"><h3>By 60 minutes</h3><ol><li>Build the initial timeline and earliest known activity.</li><li>Search across identity, endpoint, network, cloud, SaaS, and data telemetry.</li><li>Identify privilege, persistence, lateral movement, data access, and active impact.</li><li>Present containment options with impact, authority, rollback, and validation.</li><li>Set technical and stakeholder update times.</li></ol></div></div><p><a class="text-link" href="resources/templates/initial-incident-checklist.md" download>Download the complete first-hour checklist</a></p></div>
 
-                    <h4>Team Structure and Roles</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Role</th>
-                                <th>Responsibilities</th>
-                                <th>Skills Required</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Incident Commander</td>
-                                <td>Overall incident management, decision making, stakeholder communication</td>
-                                <td>Leadership, technical knowledge, communication</td>
-                            </tr>
-                            <tr>
-                                <td>Security Analyst</td>
-                                <td>Alert triage, investigation, evidence collection, threat analysis</td>
-                                <td>SIEM, EDR, log analysis, forensics</td>
-                            </tr>
-                            <tr>
-                                <td>Forensics Specialist</td>
-                                <td>Evidence preservation, detailed analysis, root cause identification</td>
-                                <td>Digital forensics, malware analysis, reverse engineering</td>
-                            </tr>
-                            <tr>
-                                <td>IT Operations</td>
-                                <td>System isolation, containment actions, restoration activities</td>
-                                <td>System administration, networking, backup/recovery</td>
-                            </tr>
-                            <tr>
-                                <td>Communications Lead</td>
-                                <td>Internal/external communications, media relations, regulatory notifications</td>
-                                <td>Crisis communications, legal/regulatory knowledge</td>
-                            </tr>
-                            <tr>
-                                <td>Legal Counsel</td>
-                                <td>Legal implications, regulatory compliance, evidence handling guidance</td>
-                                <td>Cyber law, privacy regulations, e-discovery</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="content-section operational-section" id="severity"><span class="resource-tag">03 / SEVERITY</span><h2>Rate observed impact and required coordination</h2><p>Severity is dynamic. It should combine operational impact, scope, privilege, data sensitivity, propagation, confidence, safety, and legal or contractual exposure. Reassess after every material change.</p><div class="table-scroll" tabindex="0" aria-label="Incident severity summary, horizontally scrollable"><table><caption>Severity summary—adapt response targets to your organization</caption><thead><tr><th scope="col">Level</th><th scope="col">Typical condition</th><th scope="col">Coordination</th><th scope="col">Initial update target</th></tr></thead><tbody><tr><td>SEV-1 Critical</td><td>Safety or critical service at risk; enterprise/control-plane compromise; destructive action; material data impact</td><td>Incident command, executive, legal/privacy, communications, and applicable external parties</td><td>15 minutes</td></tr><tr><td>SEV-2 High</td><td>Major service, multiple systems, high-value assets, privileged abuse, or probable sensitive-data access</td><td>Incident command, owners, legal/privacy as applicable</td><td>30 minutes</td></tr><tr><td>SEV-3 Moderate</td><td>Contained asset, account, application, or segment without confirmed material impact</td><td>Incident lead and affected owners</td><td>2 hours</td></tr><tr><td>SEV-4 Low</td><td>Blocked attempt or low-risk event without unauthorized access</td><td>Queue owner</td><td>Business day</td></tr></tbody></table></div><p><a class="text-link" href="resources/templates/incident-severity-matrix.md" download>Download the authoritative severity worksheet</a></p></div>
 
-                    <h4>Essential Tools and Resources</h4>
-                    <ul>
-                        <li><strong>Detection Platforms:</strong> Microsoft Sentinel, Microsoft Defender for Endpoint, network monitoring tools</li>
-                        <li><strong>Forensics Tools:</strong> FTK Imager, Velociraptor, Volatility, Autopsy, KAPE</li>
-                        <li><strong>Communication Channels:</strong> Microsoft Teams (dedicated incident response channels), secure conference bridges</li>
-                        <li><strong>Documentation Systems:</strong> Ticketing platforms, incident tracking databases, evidence repositories</li>
-                        <li><strong>Jump Kits:</strong> Pre-configured laptops, external storage, forensics software, network cables</li>
-                    </ul>
+        <div class="content-section operational-section" id="investigate"><span class="resource-tag">04 / INVESTIGATE</span><h2>Scope by trust boundary, not product console</h2><div class="three-column"><div class="engineering-card"><h3>Identity and access</h3><p>Sessions, authentication methods, roles, groups, OAuth grants, applications, secrets, service principals, mailbox persistence, and administrative changes.</p></div><div class="engineering-card"><h3>Systems and workloads</h3><p>Process lineage, persistence, credentials, network connections, virtualization, backups, images, registries, orchestration, and management tooling.</p></div><div class="engineering-card"><h3>Data and business</h3><p>Repositories, object access, exports, sharing, exfiltration evidence, service dependencies, customer effect, safety, and recovery priority.</p></div></div>
+        <div class="warning-box"><strong>Evidence preservation:</strong> collect volatile and short-retention evidence first. Record source, collector, UTC timestamps, acquisition method, tool version, SHA-256, storage, transfers, and system changes introduced. Do not delay necessary safety or containment action solely to achieve perfect collection.</div><p><a class="text-link" href="resources/templates/evidence-chain-of-custody.md" download>Download the evidence and chain-of-custody record</a></p></div>
 
-                    <h4>Preparation Activities</h4>
-                    <ul>
-                        <li>Develop and maintain incident response plan and playbooks</li>
-                        <li>Conduct regular tabletop exercises and simulations</li>
-                        <li>Establish communication trees and escalation procedures</li>
-                        <li>Document critical asset inventory and network diagrams</li>
-                        <li>Implement logging and monitoring across all critical systems</li>
-                        <li>Create backup and recovery procedures</li>
-                        <li>Establish relationships with external resources (legal, PR, forensics vendors)</li>
-                    </ul>
-                </div>
+        <div class="content-section operational-section" id="contain"><span class="resource-tag">05 / CONTAIN</span><h2>Use a decision gate before disruptive action</h2><div class="decision-gate"><h3>Containment gate</h3><div class="fact-assumption-grid"><div><strong>Trigger</strong><span>What evidence justifies action now?</span></div><div><strong>Authority</strong><span>Who can approve and execute it?</span></div><div><strong>Tradeoff</strong><span>Operational, safety, evidence, and adversary effects?</span></div><div><strong>Validation</strong><span>How will success, failure, and rollback be verified?</span></div></div></div>
+        <div class="table-scroll" tabindex="0" aria-label="Containment options, horizontally scrollable"><table><caption>Containment options and safeguards</caption><thead><tr><th scope="col">Action</th><th scope="col">Use when</th><th scope="col">Safeguard</th><th scope="col">Validate</th></tr></thead><tbody><tr><td>Isolate endpoint or workload</td><td>Active malicious execution, command and control, or propagation</td><td>Confirm critical-service and management-path dependencies</td><td>Isolation state plus absence of related communications</td></tr><tr><td>Restrict identity</td><td>Confirmed or high-confidence session/credential abuse</td><td>Map service-account and break-glass dependencies first</td><td>Session revocation, sign-in block, and persistence review</td></tr><tr><td>Segment network path</td><td>Lateral movement, destructive spread, or exfiltration</td><td>Model domain, backup, safety, and production dependencies</td><td>Flow, firewall, EDR, and application health evidence</td></tr><tr><td>Block indicator or behavior</td><td>Reliable malicious infrastructure, artifact, or action</td><td>Indicators expire; test business collision and bypass paths</td><td>Blocked attempt plus hunt for alternate infrastructure</td></tr><tr><td>Suspend automation or integration</td><td>Compromised token, pipeline, application, or control plane</td><td>Understand downstream recovery and availability effect</td><td>No new actions; secrets rotated; trust re-established</td></tr></tbody></table></div></div>
 
-                <div class="content-section">
-                    <h3>Phase 2: Detection and Analysis</h3>
-                    <p>Accurate identification and analysis of security incidents is critical to effective response. This phase involves confirming that an incident has occurred, determining its scope, and assessing potential impact.</p>
+        <div class="content-section operational-section" id="recover"><span class="resource-tag">06 / RECOVER</span><h2>Restore trust before declaring recovery</h2><p>Service availability is not evidence that the threat has been removed. Recovery requires a known-good state, removed persistence, rotated trust material, tested business function, and enhanced monitoring.</p><div class="two-column"><div class="engineering-card"><h3>Technical exit criteria</h3><ul><li>Initial access and persistence addressed</li><li>Compromised credentials, tokens, keys, and certificates rotated</li><li>Systems rebuilt or validated from trusted baselines</li><li>Required patches and configuration changes tested</li><li>Recovery data and infrastructure verified clean</li><li>Detection coverage added for observed behavior</li></ul></div><div class="engineering-card"><h3>Business exit criteria</h3><ul><li>Service owner validates required transactions and dependencies</li><li>Security lead accepts residual technical uncertainty</li><li>Legal/privacy decisions and preservation obligations recorded</li><li>Monitoring window, owner, and rollback threshold set</li><li>Stakeholders receive a factual recovery update</li><li>Corrective actions have owners and verification methods</li></ul></div></div></div>
 
-                    <h4>Initial Assessment</h4>
-                    <p>When an alert or suspicious activity is detected, analysts must quickly determine whether it represents a genuine security incident requiring escalation.</p>
+        <div class="content-section operational-section" id="communicate"><span class="resource-tag">07 / COMMUNICATE</span><h2>Separate operational coordination from stakeholder updates</h2><div class="table-scroll" tabindex="0" aria-label="Communication plan, horizontally scrollable"><table><caption>Communication channels and content</caption><thead><tr><th scope="col">Audience</th><th scope="col">Content</th><th scope="col">Guardrail</th></tr></thead><tbody><tr><td>Response team</td><td>Objectives, evidence, hypotheses, decisions, tasks, and next technical checkpoint</td><td>Use a protected out-of-band channel if primary identity or collaboration is affected</td></tr><tr><td>Executives and business owners</td><td>Known business impact, control state, material uncertainty, decisions required, and next update</td><td>No unsupported attribution or recovery estimate</td></tr><tr><td>Legal, privacy, insurer, regulators</td><td>Facts needed to assess privilege, coverage, notification, and preservation</td><td>Follow counsel and policy; restrict unnecessary personal information</td></tr><tr><td>Customers, partners, public</td><td>Approved facts, impact, actions, and protective guidance</td><td>Only authorized communications leads publish externally</td></tr></tbody></table></div><p><a class="text-link" href="resources/templates/executive-status-update.md" download>Download the executive status-update template</a></p></div>
 
-                    <p><strong>Assessment Criteria:</strong></p>
-                    <ul>
-                        <li><strong>Validation:</strong> Is this activity genuinely malicious or a false positive?</li>
-                        <li><strong>Scope:</strong> How many systems, users, or data assets are affected?</li>
-                        <li><strong>Severity:</strong> What is the potential business impact?</li>
-                        <li><strong>Urgency:</strong> Is the threat actively spreading or causing damage?</li>
-                        <li><strong>Classification:</strong> What type of incident is this (malware, data breach, unauthorized access)?</li>
-                    </ul>
-
-                    <h4>Incident Severity Classification</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Severity</th>
-                                <th>Description</th>
-                                <th>Response Time</th>
-                                <th>Escalation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Critical (P1)</td>
-                                <td>Active breach, ransomware, significant data loss, critical system compromise</td>
-                                <td>Immediate</td>
-                                <td>Incident Commander, Executive Leadership</td>
-                            </tr>
-                            <tr>
-                                <td>High (P2)</td>
-                                <td>Confirmed malware, unauthorized access, potential data exposure</td>
-                                <td>Within 1 hour</td>
-                                <td>Incident Commander, IT Management</td>
-                            </tr>
-                            <tr>
-                                <td>Medium (P3)</td>
-                                <td>Suspicious activity, policy violations, contained threats</td>
-                                <td>Within 4 hours</td>
-                                <td>Security Team Lead</td>
-                            </tr>
-                            <tr>
-                                <td>Low (P4)</td>
-                                <td>Anomalies requiring investigation, attempted attacks blocked by controls</td>
-                                <td>Next business day</td>
-                                <td>Security Analyst</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Investigation and Analysis</h4>
-                    <p>Conduct thorough analysis to understand the incident's full scope, attack vectors, and affected systems.</p>
-
-                    <p><strong>Analysis Activities:</strong></p>
-                    <ul>
-                        <li>Review logs from affected systems, firewalls, and security tools</li>
-                        <li>Analyze malware samples in isolated sandbox environments</li>
-                        <li>Identify indicators of compromise and search for them across the environment</li>
-                        <li>Determine initial access vector and timeline of attacker activities</li>
-                        <li>Identify compromised accounts, systems, and data</li>
-                        <li>Assess attacker objectives and potential next steps</li>
-                        <li>Correlate with threat intelligence to identify threat actor TTPs</li>
-                    </ul>
-
-                    <div class="warning-box">
-                        <strong>Evidence Preservation:</strong> Maintain chain of custody for all evidence. Document all actions taken, preserve disk images and memory dumps, and avoid making changes to compromised systems until evidence is collected.
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Phase 3: Containment</h3>
-                    <p>Containment aims to prevent the incident from spreading while maintaining business operations and preserving evidence for investigation.</p>
-
-                    <h4>Short-Term Containment</h4>
-                    <p>Immediate actions to stop the incident from spreading:</p>
-                    <ul>
-                        <li>Isolate affected systems from the network (quarantine in Microsoft Defender)</li>
-                        <li>Disable compromised user accounts</li>
-                        <li>Block malicious IP addresses and domains at perimeter firewalls</li>
-                        <li>Shut down affected services or applications</li>
-                        <li>Implement emergency firewall rules to restrict lateral movement</li>
-                        <li>Take forensic images of affected systems before making changes</li>
-                    </ul>
-
-                    <h4>Long-Term Containment</h4>
-                    <p>Sustained containment while preparing for eradication and recovery:</p>
-                    <ul>
-                        <li>Apply temporary patches or workarounds to vulnerable systems</li>
-                        <li>Implement additional monitoring on contained systems</li>
-                        <li>Segment networks to limit attacker access</li>
-                        <li>Establish clean communication channels for response team</li>
-                        <li>Deploy honeypots or deception technology to monitor attacker activities</li>
-                    </ul>
-
-                    <div class="info-box">
-                        <strong>Containment Strategy:</strong> Balance containment aggressiveness with business needs. Complete network isolation may prevent further damage but could halt critical operations. Consider partial containment or enhanced monitoring for critical systems.
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Phase 4: Eradication</h3>
-                    <p>Remove the threat from the environment and address vulnerabilities that allowed the incident to occur.</p>
-
-                    <h4>Eradication Activities</h4>
-                    <ul>
-                        <li>Remove malware from all infected systems</li>
-                        <li>Delete attacker tools, backdoors, and persistence mechanisms</li>
-                        <li>Reset credentials for all compromised accounts</li>
-                        <li>Patch vulnerabilities exploited during the attack</li>
-                        <li>Remove unauthorized accounts, services, and scheduled tasks</li>
-                        <li>Rebuild severely compromised systems from known-good backups</li>
-                        <li>Verify complete removal through re-scanning and monitoring</li>
-                    </ul>
-
-                    <div class="danger-box">
-                        <strong>Critical Warning:</strong> Do not begin eradication until investigation is complete. Premature eradication can alert attackers and cause them to activate additional backdoors or destroy evidence.
-                    </div>
-                </div>
-
-                <div class="content-section">
-                    <h3>Phase 5: Recovery</h3>
-                    <p>Restore systems to normal operation with enhanced security controls to prevent recurrence.</p>
-
-                    <h4>Recovery Process</h4>
-                    <ul>
-                        <li>Restore systems from clean backups or rebuild from trusted sources</li>
-                        <li>Apply all security patches and updates before reconnecting to network</li>
-                        <li>Implement additional security controls based on lessons learned</li>
-                        <li>Restore data from backups, validating integrity before restoration</li>
-                        <li>Gradually return systems to production with enhanced monitoring</li>
-                        <li>Verify all security controls are functioning properly</li>
-                        <li>Monitor restored systems closely for signs of re-infection</li>
-                    </ul>
-
-                    <h4>Validation Testing</h4>
-                    <p>Before fully returning systems to production:</p>
-                    <ul>
-                        <li>Scan systems with multiple anti-malware engines</li>
-                        <li>Review logs for any suspicious activity</li>
-                        <li>Test restored functionality and data integrity</li>
-                        <li>Verify security configurations and access controls</li>
-                        <li>Conduct vulnerability assessments</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Phase 6: Post-Incident Activities</h3>
-                    <p>Document findings, improve processes, and implement measures to prevent future incidents.</p>
-
-                    <h4>Post-Incident Review</h4>
-                    <p>Conduct a lessons-learned meeting within two weeks of incident closure, involving all response team members.</p>
-
-                    <p><strong>Review Topics:</strong></p>
-                    <ul>
-                        <li>What happened and how was it detected?</li>
-                        <li>What worked well during response?</li>
-                        <li>What could be improved?</li>
-                        <li>Were procedures followed? Were they adequate?</li>
-                        <li>What additional tools or training are needed?</li>
-                        <li>How can similar incidents be prevented?</li>
-                        <li>What security controls should be implemented or enhanced?</li>
-                    </ul>
-
-                    <h4>Documentation Requirements</h4>
-                    <ul>
-                        <li><strong>Incident Report:</strong> Comprehensive timeline, actions taken, findings, impact assessment</li>
-                        <li><strong>Executive Summary:</strong> High-level overview for leadership and stakeholders</li>
-                        <li><strong>Technical Report:</strong> Detailed technical analysis, IOCs, attack vectors, forensic findings</li>
-                        <li><strong>Evidence Documentation:</strong> Chain of custody, forensic images, log files, analysis results</li>
-                        <li><strong>Improvement Plan:</strong> Action items to enhance security posture and response capabilities</li>
-                    </ul>
-
-                    <h4>Continuous Improvement</h4>
-                    <ul>
-                        <li>Update incident response procedures based on lessons learned</li>
-                        <li>Implement recommended security enhancements</li>
-                        <li>Conduct additional training on identified gaps</li>
-                        <li>Update detection rules to identify similar attacks</li>
-                        <li>Share threat intelligence with industry peers</li>
-                        <li>Test improvements through tabletop exercises</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Communication Procedures</h3>
-                    <p>Effective communication during incidents is critical for coordinated response and stakeholder management.</p>
-
-                    <h4>Internal Communication</h4>
-                    <ul>
-                        <li>Establish dedicated incident response channel (Microsoft Teams)</li>
-                        <li>Provide regular status updates to incident commander and management</li>
-                        <li>Document all decisions and actions in incident timeline</li>
-                        <li>Coordinate across technical teams (security, IT, development)</li>
-                        <li>Brief executives on business impact and response progress</li>
-                    </ul>
-
-                    <h4>External Communication</h4>
-                    <ul>
-                        <li>Notify law enforcement for criminal activity (FBI, Secret Service)</li>
-                        <li>Report data breaches to regulatory authorities as required</li>
-                        <li>Inform affected customers, partners, and vendors</li>
-                        <li>Coordinate with cyber insurance providers</li>
-                        <li>Manage media inquiries through designated spokesperson</li>
-                        <li>Work with legal counsel on all external communications</li>
-                    </ul>
-
-                    <div class="warning-box">
-                        <strong>Communication Security:</strong> Use secure, out-of-band communication channels during incidents. Attackers may have access to corporate email and messaging systems.
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p>
-            <p class="footer-note">For education, research, and professional reference.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-</body>
-</html>
+        <div class="content-section operational-section" id="improve"><span class="resource-tag">08 / IMPROVE</span><h2>Close findings only after verification</h2><ul><li>Reconstruct the UTC timeline and decision points.</li><li>Identify detection, telemetry, access, ownership, communication, containment, and recovery gaps.</li><li>Translate findings into specific control, playbook, architecture, training, or recovery changes.</li><li>Assign owners, due dates, dependencies, risk acceptance, and validation methods.</li><li>Retest affected detections, access paths, playbooks, and restoration procedures.</li></ul><h3>Exercise objectives</h3><p>Tabletops and simulations should test observable capabilities: time to establish command, obtain evidence, identify business ownership, approve containment, shift to out-of-band communications, restore a critical service, and deliver an executive update under uncertainty.</p><p><a class="text-link" href="resources/templates/post-incident-review.md" download>Download the post-incident review template</a></p></div>
+    </div></section></main>
+    <footer><div class="container"><p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p><p class="footer-note">For education, research, and professional reference.</p><div class="site-footer-links"><a href="https://lrinfosec.com/">LR InfoSec Lab</a><a href="https://github.com/leandroer/IncidentResponse">GitHub repository</a><a href="resources.html">Responder resources</a><a href="security.txt">Security</a></div></div></footer><script src="js/main.js"></script>
+</body></html>

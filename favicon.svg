@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="IR Framework shield">
+  <path fill="#0f172a" d="M32 3 55 11v18c0 15-9 26-23 32C18 55 9 44 9 29V11z"/>
+  <path fill="#3b82f6" d="M32 10 48 16v13c0 10-5 18-16 24-11-6-16-14-16-24V16z"/>
+  <path fill="#fff" d="M29 19h6v22h-6zm-8 8h22v6H21z"/>
+</svg>

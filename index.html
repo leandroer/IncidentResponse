@@ -3,146 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incident Detection & Response | Home</title>
+    <meta name="description" content="A practitioner-maintained incident detection and response framework with operational guidance, playbooks, evidence practices, and reusable responder templates.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+    <link rel="canonical" href="https://lrinfosec.com/IncidentResponse/">
+    <meta property="og:title" content="Incident Detection &amp; Response Framework">
+    <meta property="og:description" content="Operational incident response guidance and reusable field artifacts for working defenders.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lrinfosec.com/IncidentResponse/">
+    <title>Incident Detection &amp; Response Framework</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <nav class="navbar" aria-label="Primary navigation">
         <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon">🛡️</span>
-                <span class="logo-text">IR Framework</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="detection.html">Detection</a></li>
-                <li><a href="response.html">Response</a></li>
-                <li><a href="playbooks.html">Playbooks</a></li>
-                <li><a href="resources.html">Resources</a></li>
-            </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <a class="nav-logo nav-logo-link" href="index.html" aria-label="IR Framework home"><span class="logo-icon" aria-hidden="true">🛡️</span><span class="logo-text">IR Framework</span></a>
+            <ul class="nav-menu"><li><a href="index.html" class="active" aria-current="page">Home</a></li><li><a href="detection.html">Detection</a></li><li><a href="response.html">Response</a></li><li><a href="playbooks.html">Playbooks</a></li><li><a href="resources.html">Resources</a></li></ul>
+            <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">☰</button>
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero hero-compact">
         <div class="container">
-            <h1>Incident Detection & Response Framework</h1>
-            <p class="hero-subtitle">Comprehensive guidance for security teams and IT professionals</p>
-            <div class="hero-cta">
-                <a href="detection.html" class="btn btn-primary">Explore Detection</a>
-                <a href="playbooks.html" class="btn btn-secondary">View Playbooks</a>
-            </div>
+            <p class="eyebrow">FIELD FRAMEWORK / VERSION 2.0</p>
+            <h1>Incident Detection &amp; Response Framework</h1>
+            <p class="hero-subtitle">Operational guidance for the people making technical and business decisions during an incident.</p>
+            <p class="hero-context">Built for security operations, engineering, infrastructure, identity, cloud, legal, privacy, and business owners. Adapt the decision authority, telemetry, tooling, and regulatory paths to your environment before an incident.</p>
+            <div class="hero-cta"><a href="resources/templates/initial-incident-checklist.md" class="btn btn-primary" download>Start the first-hour checklist</a><a href="playbooks.html" class="btn btn-secondary">Open the playbooks</a></div>
+            <div class="version-bar"><span>Last reviewed: July 17, 2026</span><span>Maintainer: Leandro Rocha</span><span>Time basis: UTC during incidents</span></div>
         </div>
     </header>
 
-    <main>
-        <section class="overview">
+    <main id="main-content">
+        <section>
             <div class="container">
-                <h2>Framework Overview</h2>
-                <p class="section-intro">A structured approach to identifying, analyzing, and responding to security incidents in modern IT environments.</p>
-                
-                <div class="cards">
-                    <div class="card">
-                        <div class="card-icon">🔍</div>
-                        <h3>Detection Techniques</h3>
-                        <p>Advanced methods for identifying security incidents through SIEM, EDR, network monitoring, and behavioral analytics.</p>
-                        <a href="detection.html" class="card-link">Learn More →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-icon">⚡</div>
-                        <h3>Response Procedures</h3>
-                        <p>Structured incident response processes following industry frameworks like NIST and SANS, with clear escalation paths.</p>
-                        <a href="response.html" class="card-link">Learn More →</a>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-icon">📋</div>
-                        <h3>Incident Playbooks</h3>
-                        <p>Ready-to-use playbooks for common incident scenarios including ransomware, data breaches, and insider threats.</p>
-                        <a href="playbooks.html" class="card-link">Learn More →</a>
+                <div class="content-section operational-section">
+                    <span class="resource-tag">OPERATING MODEL</span>
+                    <h2>Use the framework as a decision system</h2>
+                    <p>The objective is not to follow a document mechanically. It is to establish reliable evidence, explicit authority, reversible containment where possible, and measurable recovery criteria.</p>
+                    <div class="fact-assumption-grid">
+                        <div><strong>Known facts</strong><span>Telemetry, observations, and verified business impact.</span></div>
+                        <div><strong>Assumptions</strong><span>Working hypotheses with an owner and confidence level.</span></div>
+                        <div><strong>Decision</strong><span>Action, authority, tradeoff, and expected result.</span></div>
+                        <div><strong>Validation</strong><span>Evidence that the action worked and did not create unacceptable impact.</span></div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="incident-lifecycle">
-            <div class="container">
-                <h2>Incident Response Lifecycle</h2>
-                <div class="lifecycle-stages">
-                    <div class="stage">
-                        <div class="stage-number">1</div>
-                        <h3>Preparation</h3>
-                        <p>Establish policies, procedures, tools, and trained personnel before incidents occur.</p>
+                <div class="content-section operational-section">
+                    <span class="resource-tag">WORKFLOW</span>
+                    <h2>Operational response loop</h2>
+                    <p>This six-stage workflow supports active response. It complements NIST SP 800-61 Rev. 3 and NIST CSF 2.0; it is not intended to replace organization-wide cybersecurity risk management.</p>
+                    <div class="workflow" aria-label="Incident response workflow">
+                        <div class="workflow-step"><strong>1. Prepare</strong><span>Authority, telemetry, access, communications, and recovery capability.</span></div>
+                        <div class="workflow-step"><strong>2. Validate</strong><span>Confirm malicious activity and establish confidence.</span></div>
+                        <div class="workflow-step"><strong>3. Scope</strong><span>Identity, endpoint, network, cloud, SaaS, data, and business impact.</span></div>
+                        <div class="workflow-step"><strong>4. Contain</strong><span>Choose authorized actions and verify their effect.</span></div>
+                        <div class="workflow-step"><strong>5. Recover</strong><span>Remove persistence, restore trust, and monitor stability.</span></div>
+                        <div class="workflow-step"><strong>6. Improve</strong><span>Test corrective actions and feed lessons into preparation.</span></div>
                     </div>
-                    <div class="stage-arrow">→</div>
-                    <div class="stage">
-                        <div class="stage-number">2</div>
-                        <h3>Detection & Analysis</h3>
-                        <p>Identify potential incidents through monitoring, alerts, and threat intelligence.</p>
-                    </div>
-                    <div class="stage-arrow">→</div>
-                    <div class="stage">
-                        <div class="stage-number">3</div>
-                        <h3>Containment</h3>
-                        <p>Isolate affected systems to prevent further damage while maintaining business operations.</p>
-                    </div>
-                    <div class="stage-arrow">→</div>
-                    <div class="stage">
-                        <div class="stage-number">4</div>
-                        <h3>Eradication</h3>
-                        <p>Remove the threat from the environment and address root causes.</p>
-                    </div>
-                    <div class="stage-arrow">→</div>
-                    <div class="stage">
-                        <div class="stage-number">5</div>
-                        <h3>Recovery</h3>
-                        <p>Restore systems to normal operations with enhanced security controls.</p>
-                    </div>
-                    <div class="stage-arrow">→</div>
-                    <div class="stage">
-                        <div class="stage-number">6</div>
-                        <h3>Lessons Learned</h3>
-                        <p>Document findings and improve processes for future incident response.</p>
+                    <p class="feedback-loop">↺ Evidence and new impact can return the team to validation, scoping, or containment at any time.</p>
+                </div>
+
+                <div class="content-section operational-section">
+                    <span class="resource-tag">WORKING AREAS</span>
+                    <h2>Move from signal to controlled recovery</h2>
+                    <div class="cards">
+                        <article class="card"><span class="card-label">01 / DETECTION</span><h3>Build evidence, not alert volume</h3><p>Telemetry requirements, detections-as-code, triage, ATT&amp;CK mapping, validation, and coverage metrics.</p><a href="detection.html" class="card-link">Open detection engineering →</a></article>
+                        <article class="card"><span class="card-label">02 / RESPONSE</span><h3>Make accountable decisions</h3><p>Roles, severity, evidence discipline, containment gates, communications, recovery criteria, and exercises.</p><a href="response.html" class="card-link">Open response procedures →</a></article>
+                        <article class="card"><span class="card-label">03 / PLAYBOOKS</span><h3>Execute with safeguards</h3><p>Scenario-specific actions with decision authority, evidence requirements, rollback, and validation.</p><a href="playbooks.html" class="card-link">Open incident playbooks →</a></article>
+                        <article class="card"><span class="card-label">04 / FIELD KIT</span><h3>Use responder-ready artifacts</h3><p>Severity, evidence, cloud, identity, ransomware, executive-update, and post-incident templates.</p><a href="resources.html#field-kit" class="card-link">Open the field kit →</a></article>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="quick-start">
-            <div class="container">
-                <h2>Quick Start Guide</h2>
-                <div class="quick-start-grid">
-                    <div class="quick-start-item">
-                        <h3>For Security Teams</h3>
-                        <ul>
-                            <li>Review detection techniques and tools</li>
-                            <li>Familiarize with response procedures</li>
-                            <li>Customize playbooks for your environment</li>
-                            <li>Establish communication channels</li>
-                        </ul>
+                <div class="content-section operational-section">
+                    <span class="resource-tag">BOUNDARIES</span>
+                    <h2>What this framework is—and is not</h2>
+                    <div class="two-column">
+                        <div class="engineering-card"><h3>Designed to support</h3><ul><li>Preparation and tabletop exercises</li><li>Initial validation and incident coordination</li><li>Technical investigation and evidence preservation</li><li>Containment and recovery decisions</li><li>Post-incident corrective action</li></ul></div>
+                        <div class="engineering-card"><h3>Requires local adaptation</h3><ul><li>Legal and regulatory obligations</li><li>Business impact and safety constraints</li><li>Tool commands, permissions, and retention</li><li>Insurance, communications, and law-enforcement paths</li><li>Approval thresholds and delegated authority</li></ul></div>
                     </div>
-                    <div class="quick-start-item">
-                        <h3>For IT Professionals</h3>
-                        <ul>
-                            <li>Understand incident indicators</li>
-                            <li>Know escalation procedures</li>
-                            <li>Review containment strategies</li>
-                            <li>Practice with tabletop exercises</li>
-                        </ul>
-                    </div>
+                    <div class="decision-gate"><h3>Before using this during a live incident</h3><p>Confirm the incident lead, protected communication channel, evidence repository, time standard, emergency access path, escalation tree, recovery owners, and authority for disruptive containment.</p></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p>
-            <p class="footer-note">For education, research, and professional reference.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>&copy; 2026 Incident Response Framework | Created by Leandro Rocha</p><p class="footer-note">For education, research, and professional reference.</p><div class="site-footer-links"><a href="https://lrinfosec.com/">LR InfoSec Lab</a><a href="https://github.com/leandroer/IncidentResponse">GitHub repository</a><a href="resources.html">Responder resources</a><a href="security.txt">Security</a></div></div></footer>
     <script src="js/main.js"></script>
 </body>
 </html>
