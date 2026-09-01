@@ -5,17 +5,27 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from concurrent.futures import ThreadPoolExecutor
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = [ROOT / name for name in ("index.html", "detection.html", "response.html", "playbooks.html", "resources.html", "404.html")]
+PAGES = [ROOT / name for name in ("index.html", "detection.html", "response.html", "playbooks.html", "ai-security-ir.html", "repository-compromise.html", "resources.html", "404.html")]
 EXTERNALS = set()
+EXPECTED_CSP = "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests"
+FORBIDDEN_SCRIPT_PATTERNS = {
+    "innerHTML": r"\binnerHTML\b",
+    "outerHTML": r"\bouterHTML\b",
+    "document.write": r"\bdocument\.write\s*\(",
+    "eval": r"\beval\s*\(",
+    "Function constructor": r"\bnew\s+Function\s*\(",
+}
 
 class PageAudit(HTMLParser):
     def __init__(self):
         super().__init__()
         self.ids, self.hrefs, self.headings, self.errors = set(), [], [], []
-        self.description = self.csp = self.canonical = self.favicon = False
+        self.description = self.canonical = self.favicon = False
+        self.csp = None
         self.nav_label = self.main_id = self.skip_link = False
         self.tables = self.captions = self.th = self.scoped_th = 0
 
@@ -26,7 +36,7 @@ class PageAudit(HTMLParser):
             if identifier in self.ids: self.errors.append(f"duplicate id #{identifier}")
             self.ids.add(identifier)
         if tag == "meta" and data.get("name") == "description": self.description = True
-        if tag == "meta" and data.get("http-equiv", "").lower() == "content-security-policy": self.csp = True
+        if tag == "meta" and data.get("http-equiv", "").lower() == "content-security-policy": self.csp = data.get("content")
         if tag == "link" and data.get("rel") == "canonical": self.canonical = True
         if tag == "link" and data.get("rel") == "icon": self.favicon = True
         if tag == "nav" and data.get("aria-label"): self.nav_label = True
@@ -44,6 +54,8 @@ class PageAudit(HTMLParser):
             self.th += 1
             if data.get("scope") in {"col", "row"}: self.scoped_th += 1
         if "style" in data: self.errors.append(f"inline style on <{tag}>")
+        if any(name.lower().startswith("on") for name in data): self.errors.append(f"inline event handler on <{tag}>")
+        if tag == "script" and data.get("src", "").startswith(("http://", "https://", "//")): self.errors.append(f"third-party script: {data['src']}")
 
 def audit(path):
     parser = PageAudit()
@@ -52,6 +64,7 @@ def audit(path):
                 "labeled navigation": parser.nav_label, "main landmark": parser.main_id, "skip link": parser.skip_link}
     if path.name != "404.html": required["canonical"] = parser.canonical
     parser.errors.extend(f"missing {name}" for name, present in required.items() if not present)
+    if parser.csp and parser.csp != EXPECTED_CSP: parser.errors.append("CSP differs from the restrictive baseline")
     if parser.headings.count(1) != 1: parser.errors.append("page must contain exactly one h1")
     for current, following in zip(parser.headings, parser.headings[1:]):
         if following > current + 1: parser.errors.append(f"heading skips h{current} to h{following}")
@@ -75,6 +88,11 @@ failures = []
 for page in PAGES:
     if not page.exists(): failures.append(f"{page.name}: missing page"); continue
     failures.extend(f"{page.name}: {problem}" for problem in audit(page))
+
+for script in (ROOT / "js").glob("*.js"):
+    source = script.read_text(encoding="utf-8")
+    for name, pattern in FORBIDDEN_SCRIPT_PATTERNS.items():
+        if re.search(pattern, source): failures.append(f"{script.relative_to(ROOT)}: unsafe DOM/script sink {name}")
 
 if failures:
     print("\n".join(failures))
