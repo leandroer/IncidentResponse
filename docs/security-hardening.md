@@ -70,8 +70,8 @@ Dependabot, and emergency workflows all produce verifiable signatures. Keep
 bypass permissions empty or limited to a narrowly controlled emergency role.
 
 Repository administrators can update this under **Settings → Rules → Rulesets →
-Protect main**. Add the `security-audit` check after it has run at least once and
-is available in GitHub's required-check selector.
+Protect main**. The `security-audit` check was added to the active ruleset after
+its first successful run on 6 October 2026.
 
 ## GitHub Actions policy
 
