@@ -75,11 +75,24 @@ its first successful run on 6 October 2026.
 
 ## GitHub Actions policy
 
-The repository workflows pin every third-party action to a full commit SHA. GitHub
-currently allows all actions and does not enforce SHA pinning at the repository
-policy layer. If compatible with future GitHub-managed Pages or security workflows,
-set **Settings → Actions → General → Actions permissions** to **Allow actions and
-reusable workflows from select organizations**, allow GitHub-authored actions, and
-enable **Require actions to be pinned to a full-length commit SHA**. Keep workflow
-permissions read-only by default and grant job-level writes only when a workflow
-has a documented need.
+The repository workflows pin actions to full commit SHAs. On 20 October 2026,
+the repository Actions policy was changed to selected GitHub-owned actions only,
+with full-length SHA pinning enforced administratively. Verified-creator wildcard
+access is disabled. Workflow tokens remain read-only by default and cannot
+approve pull requests. Required structural/security checks and the existing
+solo-maintainer ruleset remain active.
+
+The root website additionally requires its build and CodeQL result checks.
+Publication approval archives in the private operations repository are protected
+by pull requests and a required integrity-validation workflow. Its validation
+checks the exact approved draft digest and deployed-source verification evidence.
+
+## External link monitoring
+
+External references use HTTPS-only, credential-free, public-address checks and
+bounded redirects, retries, and HEAD-to-GET fallback. Confirmed HTTP 404/410 and
+persistent server errors are reported as broken. Authentication/bot protection,
+rate limiting, and exhausted network/TLS failures are reported as inconclusive,
+not as verified links. Private or synthetic DNS targets are never fetched; a VPN
+or proxy can make a public reference inconclusive. The structural/security audits
+remain separate and fail closed for their respective repository baselines.
