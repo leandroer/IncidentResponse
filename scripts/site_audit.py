@@ -2,9 +2,6 @@
 """Dependency-free structural and safety checks for the static site."""
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
-from concurrent.futures import ThreadPoolExecutor
 import re
 import sys
 
@@ -100,20 +97,15 @@ if failures:
 print(f"Site audit passed for {len(PAGES)} pages.")
 
 if "--external" in sys.argv:
-    def check_url(url):
-        try:
-            request = Request(url, headers={"User-Agent": "IR-Framework-Link-Audit/1.0"}, method="HEAD")
-            with urlopen(request, timeout=20) as response:
-                return None if response.status < 400 else f"{response.status} {url}"
-        except HTTPError as error:
-            # Authentication, rate limiting, and bot protection still prove the host/path responded.
-            return f"{error.code} {url}" if error.code in {404, 410} or error.code >= 500 else None
-        except URLError as error:
-            return f"unreachable {url}: {error.reason}"
-
-    with ThreadPoolExecutor(max_workers=12) as pool:
-        external_failures = [result for result in pool.map(check_url, sorted(EXTERNALS)) if result]
-    if external_failures:
-        print("\n".join(external_failures))
+    from external_links import check_urls
+    from urllib.parse import urlsplit, urlunsplit
+    results = check_urls(sorted(EXTERNALS))
+    counts = {status: sum(result[0] == status for _, result in results) for status in ('verified', 'broken', 'inconclusive')}
+    for url, (status, reason) in results:
+        if status != 'verified':
+            parsed = urlsplit(url)
+            safe_url = urlunsplit((parsed.scheme, parsed.netloc, parsed.path, '', ''))
+            print(f"{status}: {safe_url}: {reason}")
+    print(f"External link audit: {counts['verified']} verified, {counts['inconclusive']} inconclusive, {counts['broken']} broken.")
+    if counts['broken']:
         sys.exit(1)
-    print(f"External link audit passed for {len(EXTERNALS)} URLs.")
