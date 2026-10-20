@@ -80,69 +80,110 @@ class HTMLSecurityAudit(HTMLParser):
 
 def is_external_url(value: str) -> bool:
     lowered = value.strip().lower()
-    return lowered.startswith(("http://", "https://", "//"))
+    return bool(re.match(r"[a-z][a-z0-9+.-]*:", lowered)) or lowered.startswith("//") or "\\" in lowered or any(ord(char) < 32 for char in lowered)
 
 
 def mask_javascript_literals(source: str) -> str:
-    """Mask comments and strings while preserving newlines and source positions."""
-    output = list(source)
-    index = 0
-    state = "code"
-    quote = ""
-    while index < len(source):
-        character = source[index]
-        following = source[index + 1] if index + 1 < len(source) else ""
+    """Keep template expressions and static computed property names visible.
 
-        if state == "code":
-            if character == "/" and following == "/":
-                output[index] = output[index + 1] = " "
-                index += 2
-                state = "line-comment"
-                continue
-            if character == "/" and following == "*":
-                output[index] = output[index + 1] = " "
-                index += 2
-                state = "block-comment"
-                continue
-            if character in {"'", '"', "`"}:
-                quote = character
-                output[index] = " "
-                index += 1
-                state = "string"
-                continue
-        elif state == "line-comment":
-            if character == "\n":
-                state = "code"
-            else:
-                output[index] = " "
-            index += 1
-            continue
-        elif state == "block-comment":
-            if character == "*" and following == "/":
-                output[index] = output[index + 1] = " "
-                index += 2
-                state = "code"
-                continue
-            if character != "\n":
-                output[index] = " "
-            index += 1
-            continue
-        elif state == "string":
-            if character == "\\":
-                output[index] = " "
-                if index + 1 < len(source):
-                    if source[index + 1] != "\n":
-                        output[index + 1] = " "
-                    index += 2
-                    continue
-            if character == quote:
-                output[index] = " "
-                state = "code"
-            elif character != "\n":
-                output[index] = " "
-            index += 1
-            continue
+    This is a lexical baseline check, not a JavaScript parser or a proof of safety.
+    Computed expressions/aliases still require human review.
+    """
+    output = list(source)
+    strings: list[tuple[int, int, str]] = []
+
+    def mask(start: int, end: int) -> None:
+        for pos in range(start, end):
+            if source[pos] not in "\r\n":
+                output[pos] = " "
+
+    def quoted(index: int) -> int:
+        start, quote = index, source[index]
         index += 1
+        while index < len(source):
+            if source[index] == "\\":
+                index += 2
+                continue
+            if source[index] == quote:
+                index += 1
+                break
+            index += 1
+        index = min(index, len(source))
+        strings.append((start, index, source[start + 1:index - 1]))
+        mask(start, index)
+        return index
+
+    def template(index: int) -> int:
+        mask(index, index + 1)
+        index += 1
+        while index < len(source):
+            if source[index] == "\\":
+                end = min(index + 2, len(source))
+                mask(index, end)
+                index = end
+            elif source[index] == "`":
+                mask(index, index + 1)
+                return index + 1
+            elif source.startswith("${", index):
+                mask(index, index + 1)
+                index = code(index + 2, True)
+            else:
+                mask(index, index + 1)
+                index += 1
+        return index
+
+    def code(index: int, expression: bool = False) -> int:
+        braces = 0
+        while index < len(source):
+            if source.startswith("//", index):
+                end = source.find("\n", index)
+                end = len(source) if end < 0 else end
+                mask(index, end)
+                index = end
+            elif source.startswith("/*", index):
+                end = source.find("*/", index + 2)
+                end = len(source) if end < 0 else end + 2
+                mask(index, end)
+                index = end
+            elif source[index] in {"'", '"'}:
+                index = quoted(index)
+            elif source[index] == "`":
+                index = template(index)
+            else:
+                if source[index] == "{":
+                    braces += 1
+                elif source[index] == "}":
+                    if expression and braces == 0:
+                        return index + 1
+                    braces -= 1
+                index += 1
+        return index
+
+    code(0)
+    # Match only literal property access, not explanatory strings or comments.
+    masked = "".join(output)
+    for start, end, literal in strings:
+        if not (masked[:start].rstrip().endswith("[") and masked[end:].lstrip().startswith("]")):
+            continue
+        def unescape(match: re.Match[str]) -> str:
+            digits = match.group(1) or match.group(2) or match.group(3)
+            try:
+                return chr(int(digits, 16))
+            except (ValueError, OverflowError):
+                return ""
+        name = re.sub(r"\\(?:u\{([0-9a-fA-F]+)\}|u([0-9a-fA-F]{4})|x([0-9a-fA-F]{2}))", unescape, literal)
+        if re.fullmatch(r"[A-Za-z_$][\w$]*", name):
+            # Strip brackets so document['write'] and location['hash'] also
+            # match existing dotted-access rules. Preserve offsets/newlines.
+            left = start - 1
+            while left >= 0 and output[left].isspace():
+                left -= 1
+            right = end
+            while right < len(output) and output[right].isspace():
+                right += 1
+            output[left] = "."
+            output[right] = " "
+            output[start:start + len(name)] = name
     return "".join(output)
 
 
