@@ -1,0 +1,23 @@
+name: Security audit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "41 14 * * 3"
+
+permissions:
+  contents: read
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Audit static-site security controls
+        run: python3 scripts/security_audit.py
+      - name: Test security scanner regressions
+        run: python3 -m unittest discover -s scripts -p 'test_security_audit.py'
