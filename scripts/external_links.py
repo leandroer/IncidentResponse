@@ -20,6 +20,9 @@ class PublicHTTPSRedirects(HTTPRedirectHandler):
     def redirect_request(self, request, fp, code, msg, headers, newurl):
         validate_url(newurl)
         return super().redirect_request(request, fp, code, msg, headers, newurl)
+    def http_error_308(self, request, fp, code, msg, headers):
+        # Python 3.9 lacks the 308 alias; GET/HEAD preserve 307 semantics.
+        return self.http_error_302(request, fp, 307, msg, headers)
 
 def check_url(url, attempts=3):
     opener = build_opener(PublicHTTPSRedirects())
@@ -47,7 +50,9 @@ def check_url(url, attempts=3):
             else:
                 return 'inconclusive', f'HTTP {error.code}'
         except ValueError as error:
-            return 'broken', str(error)
+            # Private/synthetic DNS can be a VPN/proxy artifact. Never fetch it,
+            # but don't mislabel a public reference as a confirmed dead link.
+            return 'inconclusive', 'blocked by safe-target policy: ' + str(error)
         except (URLError, TimeoutError, OSError):
             if attempt + 1 == attempts:
                 return 'inconclusive', 'network/TLS timeout or DNS failure after retries'
