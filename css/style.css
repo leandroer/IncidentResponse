@@ -581,6 +581,12 @@ section h2 {
 .resource-card { border: 1px solid var(--border-color); border-radius: 6px; padding: 1.25rem; background: #fff; }
 .resource-card h3 { font-size: 1.05rem; margin-bottom: 0.55rem; }
 .resource-card p { margin: 0; font-size: 0.95rem; }
+.framework-subsection { scroll-margin-top: 6rem; margin-top: 1.5rem; padding: 1.4rem; background: #eef6ff; border: 1px solid #b8d7f2; border-left: 5px solid var(--secondary-color); border-radius: 6px; }
+.framework-subsection-heading { display: grid; grid-template-columns: minmax(280px,0.9fr) minmax(320px,1.1fr); gap: 2rem; align-items: end; margin-bottom: 1.1rem; }
+.framework-subsection-heading h3 { margin: 0.25rem 0 0; font-size: 1.35rem; }
+.framework-subsection-heading p { margin: 0; }
+.framework-use-map { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0.65rem; margin-top: 1rem; }
+.framework-use-map p { margin: 0; padding: 0.7rem 0.8rem; color: #17385c; background: #fff; border: 1px solid #c6dced; border-radius: 4px; font-size: 0.9rem; }
 .scenario-path-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1rem; }
 .scenario-path-card { padding: 1.2rem; background: #fff; border: 1px solid var(--border-color); border-top: 3px solid var(--secondary-color); border-radius: 6px; }
 .scenario-path-card h3 { margin-bottom: 0.6rem; font-size: 1.08rem; }
@@ -724,7 +730,7 @@ footer {
     }
 
     .section-heading { grid-template-columns: 1fr; gap: 0.5rem; }
-    .incident-resource-header, .incident-resource-grid, .priority-field-kit, .resource-decision-note { grid-template-columns: 1fr; }
+    .incident-resource-header, .incident-resource-grid, .priority-field-kit, .resource-decision-note, .framework-subsection-heading, .framework-use-map { grid-template-columns: 1fr; }
     .incident-resource-header { gap: 0.75rem; }
     .priority-field-kit-links { grid-template-columns: 1fr; }
     .resource-index-grid { grid-template-columns: 1fr 1fr; }

@@ -94,6 +94,7 @@
                         <a href="#field-kit">Responder field kit</a>
                         <a href="#evidence-selector">Choose by evidence source</a>
                         <a href="#frameworks">Frameworks</a>
+                        <a href="#ai-frameworks">OWASP AI security</a>
                         <a href="#detection-engineering">Detection engineering</a>
                         <a href="#endpoint-identity">Endpoint &amp; identity</a>
                         <a href="#network-cloud">Network &amp; cloud</a>
@@ -123,7 +124,7 @@
                         <article class="scenario-path-card"><h3>Data exposure or exfiltration</h3><p><strong>Start with:</strong> repository, owner, data class, access path, identity, destination, time window, and volume.</p><p><a href="playbooks.html#data-exposure">Open data-exposure playbook</a> · <a href="#legal">Reporting coordination</a></p></article>
                         <article class="scenario-path-card"><h3>Malware outbreak</h3><p><strong>Start with:</strong> process lineage, persistence, delivery path, network behavior, affected assets, and variants.</p><p><a href="playbooks.html#malware">Open malware playbook</a> · <a href="#malware">Analysis resources</a></p></article>
                         <article class="scenario-path-card"><h3>Repository or supply-chain compromise</h3><p><strong>Start with:</strong> Git history, audit events, workflows, identities, dependencies, artifacts, and signing state.</p><p><a href="repository-compromise.html">Open repository response</a> · <a href="resources/templates/repository-compromise-checklist.md" download>Repository checklist</a></p></article>
-                        <article class="scenario-path-card"><h3>AI or agent incident</h3><p><strong>Start with:</strong> instructions, model/version, traces, tools, retrieval, memory, identities, and downstream actions.</p><p><a href="ai-security-ir.html#playbook">Open AI-IR-01</a> · <a href="resources/templates/ai-incident-evidence-checklist.md" download>AI evidence checklist</a></p></article>
+                        <article class="scenario-path-card"><h3>AI or agent incident</h3><p><strong>Start with:</strong> instructions, model/version, traces, tools, retrieval, memory, identities, and downstream actions.</p><p><a href="ai-security-ir.html#playbook">Open AI-IR-01</a> · <a href="resources/templates/ai-incident-evidence-checklist.md" download>AI evidence checklist</a> · <a href="#ai-frameworks">OWASP AI risks and controls</a></p></article>
                     </div>
                 </section>
 
@@ -197,6 +198,33 @@
                             <p>Principles and process guidance for managing information-security incidents.</p>
                         </article>
                     </div>
+
+                    <section class="framework-subsection" id="ai-frameworks" aria-labelledby="ai-frameworks-title">
+                        <div class="framework-subsection-heading">
+                            <div><span class="resource-tag">AI APPLICATION &amp; AGENT SECURITY</span><h3 id="ai-frameworks-title">OWASP GenAI risks and verification controls</h3></div>
+                            <p>Use the Top 10 resources to classify credible failure modes and shape investigative hypotheses. Use AISVS to select testable controls. None replaces incident evidence, containment authority, or the response process.</p>
+                        </div>
+                        <div class="resource-cards">
+                            <article class="resource-card">
+                                <h3><a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener noreferrer">OWASP GenAI LLM Top 10 2026</a></h3>
+                                <p><strong>Use for:</strong> application-level risk classification across prompts, data, models, retrieval, outputs, supply chains, and agency. Map relevant risks to evidence sources and testable incident hypotheses.</p>
+                            </article>
+                            <article class="resource-card">
+                                <h3><a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" target="_blank" rel="noopener noreferrer">OWASP Top 10 for Agentic Applications 2026</a></h3>
+                                <p><strong>Use for:</strong> agent goal hijacking, tool misuse, identity and privilege abuse, agentic supply chains, memory poisoning, inter-agent communication, and cascading failures.</p>
+                            </article>
+                            <article class="resource-card">
+                                <h3><a href="https://owasp.org/projects/artificial-intelligence-security-verification-standard-aisvs-docs" target="_blank" rel="noopener noreferrer">OWASP Artificial Intelligence Security Verification Standard 1.0</a></h3>
+                                <p><strong>Use for:</strong> verifiable security requirements across the AI lifecycle. Select the assurance level that matches system exposure, data sensitivity, business consequence, and regulatory obligations.</p>
+                            </article>
+                        </div>
+                        <div class="framework-use-map" aria-label="How the framework resources fit together">
+                            <p><strong>NIST and ISO:</strong> governance and response operating model</p>
+                            <p><strong>MITRE ATT&amp;CK:</strong> adversary behavior and investigative mapping</p>
+                            <p><strong>OWASP Top 10:</strong> AI application and agentic failure modes</p>
+                            <p><strong>OWASP AISVS:</strong> testable design and assurance requirements</p>
+                        </div>
+                    </section>
 
                     <details>
                         <summary>Additional NIST technical references</summary>
