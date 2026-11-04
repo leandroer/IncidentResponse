@@ -39,16 +39,60 @@
             <p class="eyebrow">RESPONDER LIBRARY</p>
             <h1>Resources &amp; References</h1>
             <p class="hero-subtitle">Frameworks, tools, field notes, and reusable artifacts for incident detection and response.</p>
-            <p class="review-date">Last reviewed: October 25, 2026</p>
+            <p class="review-date">Last technically reviewed: November 4, 2026</p>
         </div>
     </header>
 
     <main id="main-content">
         <section class="resource-library">
             <div class="container">
+                <section class="incident-resource-panel" id="incident-mode" aria-labelledby="incident-mode-title">
+                    <div class="incident-resource-header">
+                        <div>
+                            <span class="incident-resource-kicker">INCIDENT MODE</span>
+                            <h2 id="incident-mode-title">Use this page to make the next defensible decision</h2>
+                        </div>
+                        <p>Start here when an alert is credible, impact may be active, or short-retention evidence is at risk. Product output is a lead; the incident record is the evidence.</p>
+                    </div>
+                    <div class="incident-resource-grid">
+                        <div>
+                            <h3>Trigger</h3>
+                            <p>Credible malicious activity, unauthorized access, destructive behavior, material data exposure, or unsafe automation requiring coordinated response.</p>
+                        </div>
+                        <div>
+                            <h3>First five actions</h3>
+                            <ol>
+                                <li>Assign incident lead, technical lead, scribe, severity, and UTC time basis.</li>
+                                <li>Preserve the original alert and the shortest-retention evidence.</li>
+                                <li>Identify affected identities, assets, services, data, and trust boundaries.</li>
+                                <li>Present containment choices with authority, impact, rollback, and validation.</li>
+                                <li>Record every state-changing action and confirm its result independently.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3>Evidence to preserve</h3>
+                            <p>Original alerts, raw telemetry, audit logs, process lineage, sessions, configuration state, volatile data, hashes, collector details, and an operator action log.</p>
+                        </div>
+                        <div>
+                            <h3>Authority and exit criteria</h3>
+                            <p>Get explicit authority for service disruption, isolation, identity restriction, evidence acquisition, disclosure, and destructive remediation. Exit incident mode only when active impact is stopped, scope is bounded, evidence is protected, and recovery owners accept the residual risk.</p>
+                        </div>
+                    </div>
+                    <div class="incident-resource-actions" aria-label="Incident-mode shortcuts">
+                        <a href="resources/templates/initial-incident-checklist.md" download>Download first-hour checklist</a>
+                        <a href="response.html#activate">Open response workflow</a>
+                        <a href="playbooks.html">Choose a playbook</a>
+                        <a href="resources/templates/evidence-chain-of-custody.md" download>Start evidence log</a>
+                    </div>
+                </section>
+
                 <nav class="resource-index" aria-label="Resources on this page">
                     <h2>Jump to a working area</h2>
                     <div class="resource-index-grid">
+                        <a href="#incident-mode">Incident mode</a>
+                        <a href="#scenario-pathways">Scenario pathways</a>
+                        <a href="#field-kit">Responder field kit</a>
+                        <a href="#evidence-selector">Choose by evidence source</a>
                         <a href="#frameworks">Frameworks</a>
                         <a href="#detection-engineering">Detection engineering</a>
                         <a href="#endpoint-identity">Endpoint &amp; identity</a>
@@ -56,9 +100,8 @@
                         <a href="#forensics">Forensics &amp; evidence</a>
                         <a href="#malware">Malware analysis</a>
                         <a href="#intelligence">Threat intelligence</a>
-                        <a href="#field-kit">Responder field kit</a>
-                        <a href="#training">Training &amp; community</a>
                         <a href="#legal">Legal &amp; reporting</a>
+                        <a href="#training">Preparation &amp; training</a>
                         <a href="#reading">Technical reading</a>
                     </div>
                 </nav>
@@ -67,6 +110,60 @@
                     <h2>Selection principle</h2>
                     <p>Choose tools for the evidence source and decision at hand. Preserve original telemetry, record collection time and operator actions, and validate automated findings before containment or eradication.</p>
                 </aside>
+
+                <section class="content-section resource-section" id="scenario-pathways">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">ROUTING</span><h2>Choose the incident path, not a product</h2></div>
+                        <p>Each route starts with a decision, an evidence package, and a containment safeguard.</p>
+                    </div>
+                    <div class="scenario-path-grid">
+                        <article class="scenario-path-card"><h3>Ransomware or destructive activity</h3><p><strong>Start with:</strong> active encryption, identity, management-plane, backup, and egress evidence.</p><p><a href="playbooks.html#ransomware">Open ransomware playbook</a> · <a href="resources/templates/ransomware-containment-matrix.md" download>Containment matrix</a></p></article>
+                        <article class="scenario-path-card"><h3>Identity compromise</h3><p><strong>Start with:</strong> sessions, authentication methods, privilege changes, application grants, and persistence.</p><p><a href="playbooks.html#identity">Open identity playbook</a> · <a href="resources/templates/identity-investigation-worksheet.md" download>Investigation worksheet</a></p></article>
+                        <article class="scenario-path-card"><h3>Cloud or SaaS compromise</h3><p><strong>Start with:</strong> identity, control-plane, workload, network, and application audit records.</p><p><a href="playbooks.html#identity">Open cloud/identity route</a> · <a href="resources/templates/cloud-evidence-checklist.md" download>Cloud evidence checklist</a></p></article>
+                        <article class="scenario-path-card"><h3>Data exposure or exfiltration</h3><p><strong>Start with:</strong> repository, owner, data class, access path, identity, destination, time window, and volume.</p><p><a href="playbooks.html#data-exposure">Open data-exposure playbook</a> · <a href="#legal">Reporting coordination</a></p></article>
+                        <article class="scenario-path-card"><h3>Malware outbreak</h3><p><strong>Start with:</strong> process lineage, persistence, delivery path, network behavior, affected assets, and variants.</p><p><a href="playbooks.html#malware">Open malware playbook</a> · <a href="#malware">Analysis resources</a></p></article>
+                        <article class="scenario-path-card"><h3>Repository or supply-chain compromise</h3><p><strong>Start with:</strong> Git history, audit events, workflows, identities, dependencies, artifacts, and signing state.</p><p><a href="repository-compromise.html">Open repository response</a> · <a href="resources/templates/repository-compromise-checklist.md" download>Repository checklist</a></p></article>
+                        <article class="scenario-path-card"><h3>AI or agent incident</h3><p><strong>Start with:</strong> instructions, model/version, traces, tools, retrieval, memory, identities, and downstream actions.</p><p><a href="ai-security-ir.html#playbook">Open AI-IR-01</a> · <a href="resources/templates/ai-incident-evidence-checklist.md" download>AI evidence checklist</a></p></article>
+                    </div>
+                </section>
+
+                <section class="content-section resource-section" id="evidence-selector">
+                    <div class="section-heading">
+                        <div><span class="resource-tag">DECISION SUPPORT</span><h2>Choose by evidence source</h2></div>
+                        <p>Collect the minimum evidence needed to answer the response question, then confirm consequential decisions through an independent source.</p>
+                    </div>
+                    <div class="table-scroll" tabindex="0" aria-label="Evidence-source decision matrix, horizontally scrollable">
+                        <table class="operational-selector">
+                            <caption>Evidence-source selection and state-change safeguards</caption>
+                            <thead><tr><th scope="col">Starting point</th><th scope="col">Decision supported</th><th scope="col">Preserve before action</th><th scope="col">Confirm with</th><th scope="col">State-change risk</th></tr></thead>
+                            <tbody>
+                                <tr><td>Endpoint / process</td><td>Is execution active, persistent, or spreading?</td><td>Alert, process tree, memory where justified, network state, persistence artifacts</td><td>Identity and network telemetry</td><td>Isolation or live response can disrupt services and volatile evidence</td></tr>
+                                <tr><td>Identity / session</td><td>Is access unauthorized, privileged, or persistent?</td><td>Sign-ins, sessions, factors, roles, grants, directory and application audit</td><td>Endpoint and resource access logs</td><td>Revocation can break service accounts, automation, and evidence visibility</td></tr>
+                                <tr><td>Cloud control plane</td><td>Was infrastructure, policy, or data access changed?</td><td>Provider audit, configuration, workload, object, network, and SaaS records</td><td>Identity, application, and business transaction evidence</td><td>Policy or key changes may cause regional or cross-service impact</td></tr>
+                                <tr><td>Network traffic</td><td>Is there command and control, movement, or exfiltration?</td><td>Flows, DNS, proxy, VPN, firewall, packet capture where authorized</td><td>Endpoint process and destination ownership</td><td>Blocking may shift infrastructure or interrupt shared dependencies</td></tr>
+                                <tr><td>File / malware</td><td>What can the artifact do and where else did it execute?</td><td>Original sample, hash, source, delivery context, execution evidence</td><td>Behavioral analysis and environment telemetry</td><td>Public submission may disclose sensitive material</td></tr>
+                                <tr><td>Repository / delivery</td><td>Is source, automation, dependency, or artifact trust broken?</td><td>Git objects, audit events, workflows, identities, manifests, build and signing evidence</td><td>Trusted rebuild and artifact verification</td><td>Rewrites, rotations, or pipeline shutdowns can destroy evidence or block delivery</td></tr>
+                                <tr><td>AI / agent</td><td>Did instructions, retrieval, tools, or delegated actions become unsafe?</td><td>Prompt/version, traces, tool calls, retrieval context, memory, policy result, downstream effects</td><td>Target-system audit and business outcome</td><td>Disabling an agent may not revoke credentials or undo downstream actions</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="priority-field-kit" aria-labelledby="priority-field-kit-title">
+                    <div>
+                        <span class="resource-tag">QUICK ACCESS</span>
+                        <h2 id="priority-field-kit-title">Open the working artifact before the next call</h2>
+                        <p>These files are intentionally plain Markdown so responders can copy them into the authorized case system and keep working if the website is unavailable.</p>
+                    </div>
+                    <div class="priority-field-kit-links">
+                        <a href="resources/templates/initial-incident-checklist.md" download>First-hour checklist</a>
+                        <a href="resources/templates/incident-severity-matrix.md" download>Severity matrix</a>
+                        <a href="resources/templates/evidence-chain-of-custody.md" download>Evidence log</a>
+                        <a href="resources/templates/ransomware-containment-matrix.md" download>Containment matrix</a>
+                        <a href="resources/templates/executive-status-update.md" download>Executive update</a>
+                        <a href="#field-kit">View the complete field kit</a>
+                    </div>
+                </section>
 
                 <section class="content-section resource-section" id="frameworks">
                     <div class="section-heading">
@@ -116,6 +213,7 @@
                         <div><span class="resource-tag">ENGINEERING</span><h2>Detection engineering</h2></div>
                         <p>Represent behavior as portable logic, test it against real telemetry, and track coverage.</p>
                     </div>
+                    <aside class="resource-decision-note"><p><strong>Decision supported:</strong> whether observed behavior is repeatable, detectable, and material to this incident.</p><p><strong>Confirm with:</strong> raw source telemetry and an affected-system timeline—not a rule match alone.</p><p><strong>State-change caution:</strong> test new logic against representative data before enabling automated response.</p></aside>
                     <div class="table-scroll" tabindex="0" aria-label="Detection engineering tools, horizontally scrollable">
                         <table>
                             <caption>Detection content and analysis resources</caption>
@@ -136,6 +234,7 @@
                         <div><span class="resource-tag">INVESTIGATION</span><h2>Endpoint and identity</h2></div>
                         <p>Correlate process, persistence, session, credential, and directory activity before isolating assets or disabling identities.</p>
                     </div>
+                    <aside class="resource-decision-note"><p><strong>Decision supported:</strong> whether an endpoint, identity, session, or privilege path is compromised and requires restriction.</p><p><strong>Confirm with:</strong> target-resource audit, network activity, and business-owner context.</p><p><strong>State-change caution:</strong> map service-account, management-path, and critical-workload dependencies before isolation or revocation.</p></aside>
                     <div class="table-scroll" tabindex="0" aria-label="Endpoint and identity tools, horizontally scrollable">
                         <table>
                             <caption>Endpoint and identity investigation platforms</caption>
@@ -156,6 +255,7 @@
                         <div><span class="resource-tag">TELEMETRY</span><h2>Network, cloud, SaaS, and containers</h2></div>
                         <p>Collect control-plane, identity, workload, packet, and application evidence as a single incident timeline.</p>
                     </div>
+                    <aside class="resource-decision-note"><p><strong>Decision supported:</strong> whether malicious activity crossed trust boundaries, changed control-plane state, or reached data and workloads.</p><p><strong>Confirm with:</strong> identity, endpoint, and application-level transactions.</p><p><strong>State-change caution:</strong> network blocks and cloud-policy changes can affect shared services, recovery access, and evidence collection.</p></aside>
                     <div class="resource-columns">
                         <div>
                             <h3>Network</h3>
@@ -191,6 +291,7 @@
                         <div><span class="resource-tag">EVIDENCE</span><h2>Forensics and evidence collection</h2></div>
                         <p>Use targeted triage first, then escalate to full acquisition when scope, legal hold, or investigative depth requires it.</p>
                     </div>
+                    <aside class="resource-decision-note"><p><strong>Decision supported:</strong> what happened, when, through which identity or system, and with what evidentiary confidence.</p><p><strong>Confirm with:</strong> a second telemetry source, acquisition hashes, and documented collection context.</p><p><strong>State-change caution:</strong> collection changes the source; record tool, version, operator, UTC time, method, and resulting state.</p></aside>
                     <div class="table-scroll" tabindex="0" aria-label="Forensic tools, horizontally scrollable">
                         <table>
                             <caption>Collection and forensic analysis tools</caption>
@@ -216,6 +317,7 @@
                         <div><span class="resource-tag">ANALYSIS</span><h2>Malware analysis</h2></div>
                         <p>Separate initial classification, dynamic behavior, and reverse engineering. Never treat a single scanner verdict as conclusive.</p>
                     </div>
+                    <aside class="resource-decision-note"><p><strong>Decision supported:</strong> what the artifact can do, whether it executed, and which behavioral indicators should drive the hunt.</p><p><strong>Confirm with:</strong> sandbox or reverse-engineering results plus telemetry from the affected environment.</p><p><strong>State-change caution:</strong> analyze in an isolated environment and never submit sensitive material to a public service without authorization.</p></aside>
                     <div class="warning-box">
                         <h3>Public-service handling warning</h3>
                         <p>Before submitting a file, URL, packet capture, document, or indicator to a public analysis service, confirm the organization’s data-handling policy. Public or community submissions may become accessible to vendors, researchers, or other service users. Use private analysis, contractual controls, or an isolated internal sandbox for sensitive material.</p>
@@ -275,10 +377,10 @@
                     </div>
                 </section>
 
-                <section class="content-section resource-section" id="training">
+                <section class="content-section resource-section reference-only-section" id="training">
                     <div class="section-heading">
-                        <div><span class="resource-tag">DEVELOPMENT</span><h2>Training, certifications, and community</h2></div>
-                        <p>Prioritize hands-on investigation, evidence interpretation, reporting, and decision-making over credential collecting.</p>
+                        <div><span class="resource-tag">PREPARATION / NOT INCIDENT MODE</span><h2>Training, certifications, and community</h2></div>
+                        <p>Use outside active response. Prioritize hands-on investigation, evidence interpretation, reporting, and decision-making over credential collecting.</p>
                     </div>
                     <div class="resource-columns">
                         <div><h3>Role-aligned certifications</h3><ul class="linked-list">
@@ -324,10 +426,10 @@
                     </div>
                 </section>
 
-                <section class="content-section resource-section" id="reading">
+                <section class="content-section resource-section reference-only-section" id="reading">
                     <div class="section-heading">
-                        <div><span class="resource-tag">READING</span><h2>Technical reading</h2></div>
-                        <p>A mix of durable references and continuously updated field research.</p>
+                        <div><span class="resource-tag">PREPARATION / NOT INCIDENT MODE</span><h2>Technical reading</h2></div>
+                        <p>Use for continuing education and preparation rather than as incident evidence. A mix of durable references and continuously updated field research.</p>
                     </div>
                     <div class="resource-columns">
                         <div><h3>Books</h3><ul>
