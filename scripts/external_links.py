@@ -23,7 +23,8 @@ def public_addresses(host):
         if (family not in (socket.AF_INET, socket.AF_INET6)
                 or not address.is_global or address.is_multicast
                 or (address.version == 6 and (
-                    address.ipv4_mapped is not None
+                    address.is_site_local
+                    or address.ipv4_mapped is not None
                     or sockaddr[3]
                     or any(address in network for network in _IPV6_TRANSITION)
                 ))):

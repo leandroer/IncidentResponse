@@ -1,6 +1,6 @@
 import socket
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import external_links as links
 
@@ -31,6 +31,14 @@ class LinkTests(unittest.TestCase):
             links.PublicHTTPSConnection('example.com').connect()
         make_socket.assert_not_called()
 
+    @patch.object(links.socket, 'getaddrinfo')
+    def test_rejects_ipv6_addresses_with_local_or_translated_destinations(self, resolve):
+        for address in ('fec0::1', '64:ff9b::7f00:1', '::ffff:127.0.0.1', 'ff02::1'):
+            resolve.return_value = [(socket.AF_INET6, socket.SOCK_STREAM,
+                                     socket.IPPROTO_TCP, '', (address, 443, 0, 0))]
+            with self.subTest(address=address), self.assertRaises(ValueError):
+                links.public_addresses('example.com')
+
     @patch.object(links, 'PublicHTTPSConnection')
     def test_rejects_insecure_targets_and_redirects(self, connection):
         for url in ('file:///etc/passwd', 'http://example.com/', 'https://@example.com/'):
@@ -51,7 +59,7 @@ class LinkTests(unittest.TestCase):
                                        (second, 206, None)):
             response = Mock(status=status)
             response.getheader.return_value = location
-            conn.getresponse.return_value = unittest.mock.MagicMock()
+            conn.getresponse.return_value = MagicMock()
             conn.getresponse.return_value.__enter__.return_value = response
         self.assertEqual(links.request_status('https://example.com/', 'GET'), 206)
         self.assertEqual([call.args[0] for call in connection.call_args_list],
